@@ -2,6 +2,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 
+// Routes files
+const auth = require('./routes/auth');
+
 // Load env vars
 dotenv.config({ path: './config/config.env' });
 
@@ -17,9 +20,9 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Server setup okay' });
-});
+// Mount routers
+app.use('/auth', auth);
+
 
 const PORT = process.env.PORT || 5000;
 

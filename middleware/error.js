@@ -15,8 +15,13 @@ const errorHandler = (err, req, res, next) => {
   }
 
   // Mongoose duplicate key
-  if (err.code === 11000) {
-    const message = 'The data you entered already exist';
+  if (err.code === 11000 && err.keyValue.email) {
+    const message = 'The email already exist';
+    error = new ErrorResponse(message, 400);
+  }
+
+  if (err.code === 11000 && err.keyValue.hostelName) {
+    const message = 'The hostel name already exist';
     error = new ErrorResponse(message, 400);
   }
 

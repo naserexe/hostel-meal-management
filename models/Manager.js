@@ -27,7 +27,8 @@ const ManagerSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add hostel name'],
     // eslint-disable-next-line
-    minlength:5,
+    minlength: [5, 'hostel name should be more than 5 character'],
+    match: [/^[a-zA-Z0-9\-]+$/, 'Your hostel name is not valid. Only characters A-Z, a-z, 0-9 and - are acceptable.'],
     unique: true,
   },
 });

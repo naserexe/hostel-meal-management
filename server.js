@@ -8,6 +8,7 @@ const connectDB = require('./config/db');
 
 // Routes files
 const auth = require('./routes/auth');
+const test = require('./routes/authTest');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount routers
 app.use('/api/auth', auth);
+app.use('/api/test', test);
 
 
 const PORT = process.env.PORT || 5000;

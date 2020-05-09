@@ -1,6 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+
+const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 // Routes files
@@ -18,6 +21,9 @@ const app = express();
 // Body parser
 app.use(express.json());
 
+// Cookie Parser
+app.use(cookieParser());
+
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -25,10 +31,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Mount routers
-app.use('/auth', auth);
+app.use('/api/auth', auth);
 
 
 const PORT = process.env.PORT || 5000;
+
+// Error handler
+app.use(errorHandler);
 
 const server = app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`));
 

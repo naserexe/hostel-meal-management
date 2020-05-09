@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -49,6 +48,12 @@ ManagerSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+// Match password to hashed password in database
+ManagerSchema.methods.matchPassword = async function (enteredPassword) {
+  const res = await bcrypt.compare(enteredPassword, this.password);
+  return res;
 };
 
 module.exports = mongoose.model('Manager', ManagerSchema);

@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -27,7 +26,8 @@ const ManagerSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add hostel name'],
     // eslint-disable-next-line
-    minlength:5,
+    minlength: [5, 'hostel name should be more than 5 character'],
+    match: [/^[a-zA-Z0-9\-]+$/, 'Your hostel name is not valid. Only characters A-Z, a-z, 0-9 and - are acceptable.'],
     unique: true,
   },
 });
@@ -48,6 +48,12 @@ ManagerSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+// Match password to hashed password in database
+ManagerSchema.methods.matchPassword = async function (enteredPassword) {
+  const res = await bcrypt.compare(enteredPassword, this.password);
+  return res;
 };
 
 module.exports = mongoose.model('Manager', ManagerSchema);

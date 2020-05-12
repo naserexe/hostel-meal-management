@@ -18,15 +18,15 @@ const Navbar = () => {
 
       <SubMenu icon={<MediumCircleFilled />} title="Manager">
         <Menu.ItemGroup title="Authentication">
-          <Menu.Item  key="login"><Link to='/manager/login'>Login</Link></Menu.Item>
-          <Menu.Item key="register"><Link to='/manager/register'>Register</Link></Menu.Item>
+          <Menu.Item  key="m_login"><Link to='/manager/login'>Login</Link></Menu.Item>
+          <Menu.Item key="m_register"><Link to='/manager/register'>Register</Link></Menu.Item>
         </Menu.ItemGroup>
       </SubMenu>
 
       <SubMenu icon={< IdcardFilled />} title="Boarder">
           <Menu.ItemGroup title="Authentication">
-            <Menu.Item key="login"><Link to='/boarder/login'>Login</Link></Menu.Item>
-            <Menu.Item key="register"><Link to='/boarder/register'>Register</Link></Menu.Item>
+            <Menu.Item key="b_login"><Link to='/boarder/login'>Login</Link></Menu.Item>
+            <Menu.Item key="b_register"><Link to='/boarder/register'>Register</Link></Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
 

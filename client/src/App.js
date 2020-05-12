@@ -21,11 +21,13 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home}/>
 
-        <Route exact path='/manager/login' component={ManagerLogin}/>
-        <Route exact path='/manager/registration' component={ManagerRegistration}/>
+        <Home>
+          <Route exact path='/manager/login' component={ManagerLogin}/>
+          <Route exact path='/manager/register' component={ManagerRegistration}/>
 
-        <Route exact path='/boarder/login' component={BoarderLogin}/>
-        <Route exact path='/boarder/registration' component={BoarderRegistration}/>
+          <Route exact path='/boarder/login' component={BoarderLogin}/>
+          <Route exact path='/boarder/register' component={BoarderRegistration}/>
+        </Home>
   
         <Dashboard>
             <Route exact path='/add' component={AddMarket}/>

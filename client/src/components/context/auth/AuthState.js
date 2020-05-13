@@ -5,7 +5,7 @@ import authReducer from './authReducer'
 
 import setAuthToken from '../../utils/setAuthToken'
 
-import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR } from '../types';
+import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL } from '../types';
 
 const AuthState = props => {
   const initialState = {
@@ -27,14 +27,14 @@ const AuthState = props => {
     };
 
     try {
-      const res = await axios.post('api/auth/register', formData, config);
+      const res = await axios.post('/api/auth/register', formData, config);
 
       dispatch({
         type: REGISTER_SUCCESS, payload: res.data
       });
-      
+      //loadUser();
     } catch (err) {
-      
+      dispatch({type: REGISTER_FAIL, payload: err.response.data})
     }
   } 
 
@@ -55,4 +55,22 @@ const AuthState = props => {
       })
     }
   }
+
+  return(
+    <AuthContext.Provider
+    value={{
+      token: state.token,
+      isAuthenticated: state.isAuthenticated,
+      loading: state.loading,
+      user: state.user,
+      error: state.error,
+      register,
+      loadUser
+    }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  )
 }
+
+export default AuthState;

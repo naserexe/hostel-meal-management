@@ -15,10 +15,6 @@ const Register = () => {
   const [hostelName, setHostelName] = useState('asdfsdf');
   const [password, setPassword] = useState('sadfdsf');
 
-  const validateMessages = {
-    required: `${name} is required`,
-    pattern: `${name} pattern error`
-  }
 
   const onSubmit = () => {
     register({name, email, hostelName, password})

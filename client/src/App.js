@@ -1,5 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
+
+import AuthState from '../src/components/context/auth/AuthState'
+
 import  Dashboard  from './components/layout/Dashboard/Dashboard';
 import { AddMarket } from './components/AddMarket';
 import { Home } from './components/Home';
@@ -15,7 +18,8 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthState>
+      <BrowserRouter>
       <div className='App'>
       
       <Switch>
@@ -36,6 +40,7 @@ function App() {
       </Switch>
     </div>
     </BrowserRouter>
+    </AuthState>
   );
 }
 

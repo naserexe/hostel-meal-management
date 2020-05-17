@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import AuthContext from '../../context/auth/authContext'
+
 import './style.css';
 
-const Login = () => {
+const Login = (props) => {
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  
+  const authContext = useContext(AuthContext);
+
+  const { login, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if(isAuthenticated){
+      props.history.push('/');
+    }
+  })
+
   const onSubmit = () => {
-    console.log('Form Submitted')
+    login({email, password})
   }
   return (
       <Form
@@ -19,15 +35,15 @@ const Login = () => {
         onFinish={onSubmit}
       >
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: 'Please input your Email!',
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input onChange={(e) => setEmail(e.target.value)} value={email} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -39,6 +55,8 @@ const Login = () => {
           ]}
         >
           <Input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
@@ -49,10 +67,10 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <a href="!#">register now!</a>
+          Or <Link to="/manager/register">Register now!</Link>
         </Form.Item>
       </Form>
   )
 }
 
-export default Login;
+export default withRouter(Login);

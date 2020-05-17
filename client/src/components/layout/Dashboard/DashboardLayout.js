@@ -8,7 +8,7 @@ import {
     UploadOutlined,
 } from '@ant-design/icons';
 
-import './Dashboard.css';
+import './DashboardLayout.css';
 
 const { Header, Sider, Content, Footer } = Layout;
 

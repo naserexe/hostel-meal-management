@@ -65,3 +65,13 @@ exports.login = asyncHandler(async (req, res, next) => {
   }
   return sendTokenResponse(manager, 200, res);
 });
+
+
+// @desc    Get logged in user
+// @route   POST /api/v1/auth/me
+// @access  Private
+exports.getMe = asyncHandler(async (req, res) => {
+  const user = await Manager.findById(req.user.id);
+
+  res.status(200).json({ success: true, data: user });
+});

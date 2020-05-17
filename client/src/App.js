@@ -1,44 +1,48 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import AuthState from '../src/components/context/auth/AuthState'
 
-import  Dashboard  from './components/layout/Dashboard/Dashboard';
+
+import  Dashboard  from './components/Dashboard';
 import { AddMarket } from './components/AddMarket';
 import { Home } from './components/Home';
-import { Border } from './components/Border';
 
 import ManagerLogin from './components/auth/manager/ManagerLogin'
 import ManagerRegistration from './components/auth/manager/ManagerRegister'
 
 import BoarderLogin from './components/auth/boarder/BoarderLogin'
-import BoarderRegistration from './components/auth/boarder/BoarderRegister'
+import BoarderRegistration from './components/auth/boarder/BoarderRegister';
 
-import './App.css'
+import AuthState from './components/context/auth/AuthState';
+
+
+import setAuthToken from './utils/setAuthToken';
+
+import './App.css';
+import PrivateRoute from './components/Routing/PrivateRoute';
+
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 
 function App() {
   return (
     <AuthState>
       <BrowserRouter>
-      <div className='App'>
-      
-      <Switch>
-        <Route exact path='/' component={Home}/>
-
-        <Home>
-          <Route exact path='/manager/login' component={ManagerLogin}/>
-          <Route exact path='/manager/register' component={ManagerRegistration}/>
-
-          <Route exact path='/boarder/login' component={BoarderLogin}/>
-          <Route exact path='/boarder/register' component={BoarderRegistration}/>
-        </Home>
-  
-        <Dashboard>
-            <Route exact path='/add' component={AddMarket}/>
-            <Route exact path='/border' component={Border}/>
-        </Dashboard>
-      </Switch>
-    </div>
+        <Fragment>
+          <div className='App'>
+            <Switch>
+              <PrivateRoute exact path = '/' component={Dashboard}/>
+              <Route exact path = '/add' render={() => <Dashboard><AddMarket/></Dashboard>}/>
+              <Route exact path = '/manager/login' render={() => <Home><ManagerLogin/></Home>}/>
+              <Route exact path = '/manager/register' render={() => <Home><ManagerRegistration/></Home>}/>
+              <Route exact path = '/boarder/login' render={() => <Home><BoarderLogin/></Home>}/>
+              <Route exact path = '/boarder/register' render={() => <Home><BoarderRegistration/></Home>}/>
+            </Switch>
+          </div>
+        </Fragment>
     </BrowserRouter>
     </AuthState>
   );

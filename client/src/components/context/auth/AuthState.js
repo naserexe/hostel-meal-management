@@ -3,14 +3,14 @@ import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer'
 
-import setAuthToken from '../../utils/setAuthToken'
+import setAuthToken from '../../../utils/setAuthToken'
 
-import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL } from '../types';
+import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL } from '../types';
 
 const AuthState = props => {
   const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: true,
     user: null,
     error: null
@@ -18,7 +18,7 @@ const AuthState = props => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Register manager
+  // Register user
   const register = async formData => {
     const config = {
       headers: {
@@ -32,11 +32,31 @@ const AuthState = props => {
       dispatch({
         type: REGISTER_SUCCESS, payload: res.data
       });
-      //loadUser();
+      loadUser();
     } catch (err) {
-      dispatch({type: REGISTER_FAIL, payload: err.response.data})
+      console.log(err.response.data);
+      dispatch({type: REGISTER_FAIL, payload: err.response.data.error})
     }
   } 
+
+    // Login User
+    const login = async formData => {
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+  
+      try {
+        const res = await axios.post("/api/auth/login", formData, config);
+  
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+        loadUser();
+      } catch (err) {
+        dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
+      }
+    };
+  
 
   const loadUser = async () => {
     if(localStorage.token){
@@ -44,14 +64,15 @@ const AuthState = props => {
     }
 
     try {
-      const res = await axios.get('/api/auth');
+      const res = await axios.get('/api/auth/me');
       dispatch({
         type: USER_LOADED,
         payload: res.data
       })
     } catch (err) {
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
+        payload: err.response.data.error
       })
     }
   }
@@ -65,6 +86,7 @@ const AuthState = props => {
       user: state.user,
       error: state.error,
       register,
+      login,
       loadUser
     }}
     >

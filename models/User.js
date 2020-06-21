@@ -63,4 +63,4 @@ ManagerSchema.methods.matchPassword = async function (enteredPassword) {
   return res;
 };
 
-module.exports = mongoose.model('Manager', ManagerSchema);
+module.exports = mongoose.model('users', ManagerSchema);

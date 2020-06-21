@@ -26,7 +26,6 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-
 function App() {
   return (
     <AuthState>

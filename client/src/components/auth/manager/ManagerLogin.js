@@ -14,13 +14,14 @@ const Login = (props) => {
   
   const authContext = useContext(AuthContext);
 
-  const { login, isAuthenticated } = authContext;
+  const { login, isAuthenticated, loadUser } = authContext;
 
   useEffect(() => {
+    loadUser();
     if(isAuthenticated){
       props.history.push('/');
     }
-  })
+  },[isAuthenticated])
 
   const onSubmit = () => {
     login({email, password})

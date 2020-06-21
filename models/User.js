@@ -17,6 +17,11 @@ const ManagerSchema = new mongoose.Schema({
       'Please use correct email',
     ],
   },
+  role: {
+    type: String,
+    enum: ['manager', 'boarder'],
+    default: 'manager',
+  },
   password: {
     type: String,
     required: [true, 'Please enter your password'],

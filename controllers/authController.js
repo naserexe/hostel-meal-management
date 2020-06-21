@@ -1,7 +1,7 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
-const Manager = require('../models/Manager');
+const User = require('../models/User');
 
 
 // Get token from model, create cookie and send response
@@ -24,20 +24,20 @@ const sendTokenResponse = (user, statusCode, res) => {
 };
 
 
-// @desc    Register a manager
+// @desc    Register a user
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req, res) => {
   const {
-    name, email, password, hostelName,
+    name, email, password, hostelName, role,
   } = req.body;
 
   // Create manager
-  const manager = await Manager.create({
-    name, email, password, hostelName,
+  const user = await User.create({
+    name, email, password, hostelName, role,
   });
 
-  sendTokenResponse(manager, 200, res);
+  sendTokenResponse(user, 200, res);
 });
 
 
@@ -53,17 +53,17 @@ exports.login = asyncHandler(async (req, res, next) => {
   }
 
   // Check for manager
-  const manager = await Manager.findOne({ email }).select('+password');
-  if (!manager) {
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) {
     return next(new ErrorResponse('Invalid credentials!', 401));
   }
 
   // Check if password match
-  const isMatch = await manager.matchPassword(password);
+  const isMatch = await user.matchPassword(password);
   if (!isMatch) {
     return next(new ErrorResponse('Invalid credentials!', 401));
   }
-  return sendTokenResponse(manager, 200, res);
+  return sendTokenResponse(user, 200, res);
 });
 
 
@@ -71,7 +71,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/me
 // @access  Private
 exports.getMe = asyncHandler(async (req, res) => {
-  const user = await Manager.findById(req.user.id);
+  const user = await User.findById(req.user.id);
 
   res.status(200).json({ success: true, data: user });
 });

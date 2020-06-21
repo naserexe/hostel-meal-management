@@ -1,30 +1,34 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { withRouter, Link} from 'react-router-dom'
 
-import { Form, Input, Button } from 'antd';
-import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Select } from 'antd';
 
-import AuthContext from '../../context/auth/authContext'
+import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined, FormatPainterFilled } from '@ant-design/icons';
 
+import AuthContext from '../context/auth/authContext'
+
+const { Option } = Select;
 const Register = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { register, isAuthenticated } = authContext;
+  const { register, isAuthenticated,loadUser } = authContext;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [hostelName, setHostelName] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
 
   useEffect(() => {
+    loadUser()
     if(isAuthenticated){
       props.history.push('/');
     }
-  })
+  },[isAuthenticated])
 
 
   const onSubmit = () => {
-    register({name, email, hostelName, password})
+    register({name, email, password, hostelName, role});
   }
 
   return (
@@ -65,6 +69,24 @@ const Register = (props) => {
           ]}
         >
           <Input onChange={(e) => setEmail(e.target.value)} name='email' value={email} prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email" />
+        </Form.Item>
+
+        <Form.Item
+          name="role"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            placeholder="Select Role"
+            onChange={value => setRole(value)}
+            allowClear
+          >
+            <Option value="manager">Manager</Option>
+            <Option value="boarder">Boarder</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -116,7 +138,7 @@ const Register = (props) => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Register
           </Button>
-          Or <Link to="/manager/login">Login now!</Link>
+          Or <Link to="/login">Login now!</Link>
         </Form.Item>
       </Form>
     </div>

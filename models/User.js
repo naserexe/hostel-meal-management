@@ -17,6 +17,11 @@ const ManagerSchema = new mongoose.Schema({
       'Please use correct email',
     ],
   },
+  role: {
+    type: String,
+    enum: ['manager', 'boarder'],
+    default: 'manager',
+  },
   password: {
     type: String,
     required: [true, 'Please enter your password'],
@@ -58,4 +63,4 @@ ManagerSchema.methods.matchPassword = async function (enteredPassword) {
   return res;
 };
 
-module.exports = mongoose.model('Manager', ManagerSchema);
+module.exports = mongoose.model('users', ManagerSchema);

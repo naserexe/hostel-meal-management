@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import AuthContext from '../../context/auth/authContext'
+import AuthContext from '../context/auth/authContext'
 
 import './style.css';
 
@@ -14,13 +14,14 @@ const Login = (props) => {
   
   const authContext = useContext(AuthContext);
 
-  const { login, isAuthenticated } = authContext;
+  const { login, isAuthenticated, loadUser } = authContext;
 
   useEffect(() => {
+    loadUser();
     if(isAuthenticated){
       props.history.push('/');
     }
-  })
+  },[isAuthenticated])
 
   const onSubmit = () => {
     login({email, password})
@@ -67,7 +68,7 @@ const Login = (props) => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          Or <Link to="/manager/register">Register now!</Link>
+          Or <Link to="/register">Register now!</Link>
         </Form.Item>
       </Form>
   )

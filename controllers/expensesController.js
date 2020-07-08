@@ -20,3 +20,8 @@ exports.getAllExpense = async (req, res, next) => {
 
   res.status(200).json({ success: true, data: expense });
 };
+
+exports.deleteExpenses = async (req, res, next) => {
+  await Expense.findByIdAndDelete(req.params.id);
+  res.status(200).json({ success: true, data: 'Successfully deleted' });
+};

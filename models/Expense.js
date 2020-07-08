@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
 const ExpenseSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'users',
+    required: true,
+  },
   name: {
     type: String,
     required: true,
-
   },
   type: {
     type: String,

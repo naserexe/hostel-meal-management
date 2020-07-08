@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 
 import  Dashboard  from './components/Dashboard';
-import { AddMarket } from './components/AddMarket';
+import AddExpense from './components/Expenses/AddExpense'
 import { Home } from './components/Home';
 
 import Login from './components/auth/Login'
@@ -31,7 +31,7 @@ function App() {
           <div className='App'>
             <Switch>
               <PrivateRoute exact path = '/' component={Dashboard}/>
-              <Route exact path = '/add' render={() => <Dashboard><AddMarket/></Dashboard>}/>
+              <PrivateRoute exact path = '/add' component={AddExpense}/>
               <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
               <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
             </Switch>

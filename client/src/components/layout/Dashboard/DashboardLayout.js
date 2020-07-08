@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
@@ -9,8 +10,10 @@ import {
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
+import AddExpense from '../../Expenses/AddExpense';
 
 const { Header, Sider, Content, Footer } = Layout;
+
 
 const Dashboard = (props) => {
     const [sidebarToggle, setSidebarToggle] = useState(false);
@@ -30,7 +33,7 @@ const Dashboard = (props) => {
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+              <Link style={{color: 'white'}} to='/add'>Add Expense</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               nav 2

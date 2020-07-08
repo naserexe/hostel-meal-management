@@ -3,7 +3,7 @@ import { withRouter, Link} from 'react-router-dom'
 
 import { Form, Input, Button, Select } from 'antd';
 
-import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined, FormatPainterFilled } from '@ant-design/icons';
+import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined } from '@ant-design/icons';
 
 import AuthContext from '../context/auth/authContext'
 

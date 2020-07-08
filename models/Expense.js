@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 
-const ExpenseSchema = mongoose.Schema({
+const ExpenseSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'users',
-    required: true,
+    required: [true, 'Please add a name'],
   },
   name: {
     type: String,
-    required: true,
+    required: [true, 'Name is required'],
   },
   type: {
     type: String,
-    required: true,
+    required: [true, 'Type is required'],
   },
   cost: {
     type: Number,
-    required: true,
+    required: [true, 'Cost is required'],
   },
   marketer: {
     type: mongoose.Schema.Types.ObjectId,

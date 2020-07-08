@@ -4,7 +4,7 @@ import DashboardLayout from './layout/Dashboard/DashboardLayout';
 import AuthContext from './context/auth/authContext';
 
 const Dashboard = (props) => {
-  const authContext = useContext(AuthContext);
+  //const authContext = useContext(AuthContext);
 
   useEffect(() => {
     // Load user method will here

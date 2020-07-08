@@ -4,13 +4,13 @@ import { withRouter, Link} from 'react-router-dom'
 import { Form, Input, Button, Select } from 'antd';
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
-import AuthContext from '../context/auth/authContext'
+import ExpenseContext from '../context/expense/expenseContext'
 
 const { Option } = Select;
 const AddExpense = (props) => {
 
-  const authContext = useContext(AuthContext);
-  const { register, isAuthenticated,loadUser } = authContext;
+  const expenseContext = useContext(ExpenseContext);
+  const { addExpense, getExpenses } = expenseContext;
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -19,7 +19,7 @@ const AddExpense = (props) => {
 
 
   const onSubmit = () => {
-    console.log(name, type, cost, marketer);
+    addExpense({name, type, cost})
   }
 
   return (
@@ -92,9 +92,8 @@ const AddExpense = (props) => {
 
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button">
-            Register
+            Add
           </Button>
-          Or <Link to="/login">Login now!</Link>
         </Form.Item>
       </Form>
     </div>

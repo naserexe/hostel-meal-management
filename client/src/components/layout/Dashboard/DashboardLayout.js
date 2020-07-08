@@ -4,13 +4,12 @@ import { Layout, Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
+    FileAddOutlined,
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
-import AddExpense from '../../Expenses/AddExpense';
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -32,7 +31,7 @@ const Dashboard = (props) => {
         }}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
+            <Menu.Item key="1" icon={<FileAddOutlined />}>
               <Link style={{color: 'white'}} to='/add'>Add Expense</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>

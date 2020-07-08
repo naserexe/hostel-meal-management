@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 
 
-import  Dashboard  from './components/Dashboard';
+import Dashboard  from './components/Dashboard';
 import AddExpense from './components/Expenses/AddExpense'
 import { Home } from './components/Home';
 
@@ -11,6 +11,7 @@ import Login from './components/auth/Login'
 import Registration from './components/auth/Register'
 
 import AuthState from './components/context/auth/AuthState';
+import ExpenseState from './components/context/expense/ExpenseState';
 
 
 import setAuthToken from './utils/setAuthToken';
@@ -26,18 +27,20 @@ if (localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <BrowserRouter>
-        <Fragment>
-          <div className='App'>
-            <Switch>
-              <PrivateRoute exact path = '/' component={Dashboard}/>
-              <PrivateRoute exact path = '/add' component={AddExpense}/>
-              <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
-              <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
-            </Switch>
-          </div>
-        </Fragment>
-    </BrowserRouter>
+      <ExpenseState>
+        <BrowserRouter>
+          <Fragment>
+            <div className='App'>
+              <Switch>
+                <PrivateRoute exact path = '/' component={Dashboard}/>
+                <PrivateRoute exact path = '/add' component={AddExpense}/>
+                <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
+                <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
+              </Switch>
+            </div>
+          </Fragment>
+        </BrowserRouter>
+      </ExpenseState>
     </AuthState>
   );
 }

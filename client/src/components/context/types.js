@@ -7,4 +7,8 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const EXPENSES_ERROR = 'EXPENSES_ERROR';
+export const GET_EXPENSES = 'GET_EXPENSES';
+
 

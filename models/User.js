@@ -39,7 +39,6 @@ const ManagerSchema = new mongoose.Schema({
   },
 });
 
-
 // Encrypt password using bcryptjs
 ManagerSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {

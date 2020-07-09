@@ -28,18 +28,11 @@ const sendTokenResponse = (user, statusCode, res) => {
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req, res) => {
-  const {
-    name, email, password, hostelName, role,
-  } = req.body;
-
   // Create manager
-  const user = await User.create({
-    name, email, password, hostelName, role,
-  });
+  const user = await User.create(req.body);
 
   sendTokenResponse(user, 200, res);
 });
-
 
 // @desc    Logging user
 // @route   POST /api/auth/login

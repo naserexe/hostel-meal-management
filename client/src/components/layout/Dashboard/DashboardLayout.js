@@ -1,16 +1,19 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
+    DollarCircleFilled,
     VideoCameraOutlined,
     UploadOutlined,
+    DashboardFilled,
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
 
 const { Header, Sider, Content, Footer } = Layout;
+
 
 const Dashboard = (props) => {
     const [sidebarToggle, setSidebarToggle] = useState(false);
@@ -28,16 +31,24 @@ const Dashboard = (props) => {
           left: 0,
         }}>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+
+          <Menu.Item key="0" icon={<DashboardFilled />}>
+              <Link style={{color: 'white'}} to='/'>Dashboard</Link>
             </Menu.Item>
+
+            <Menu.Item key="1" icon={<DollarCircleFilled />}>
+              <Link style={{color: 'white'}} to='/add'>Add Expense</Link>
+            </Menu.Item>
+
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               nav 2
             </Menu.Item>
+            
             <Menu.Item key="3" icon={<UploadOutlined />}>
               nav 3
             </Menu.Item>
+
           </Menu>
         </Sider>
         <Layout className="site-layout">

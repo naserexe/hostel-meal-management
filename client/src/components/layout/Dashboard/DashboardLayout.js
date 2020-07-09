@@ -4,9 +4,10 @@ import { Layout, Menu } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    FileAddOutlined,
+    DollarCircleFilled,
     VideoCameraOutlined,
     UploadOutlined,
+    DashboardFilled,
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
@@ -30,16 +31,24 @@ const Dashboard = (props) => {
           left: 0,
         }}>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<FileAddOutlined />}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+
+          <Menu.Item key="0" icon={<DashboardFilled />}>
+              <Link style={{color: 'white'}} to='/'>Dashboard</Link>
+            </Menu.Item>
+
+            <Menu.Item key="1" icon={<DollarCircleFilled />}>
               <Link style={{color: 'white'}} to='/add'>Add Expense</Link>
             </Menu.Item>
+
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               nav 2
             </Menu.Item>
+            
             <Menu.Item key="3" icon={<UploadOutlined />}>
               nav 3
             </Menu.Item>
+
           </Menu>
         </Sider>
         <Layout className="site-layout">

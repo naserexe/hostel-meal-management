@@ -11,4 +11,6 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const EXPENSES_ERROR = 'EXPENSES_ERROR';
 export const GET_EXPENSES = 'GET_EXPENSES';
 
+export const GET_TOTAL_EXPENSE_COST = 'GET_TOTAL_EXPENSE_COST';
+
 

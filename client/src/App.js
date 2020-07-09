@@ -18,6 +18,7 @@ import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 import PrivateRoute from './components/Routing/PrivateRoute';
+import TotalExpense from './components/Expenses/TotalExpense';
 
 
 if (localStorage.token) {
@@ -32,7 +33,7 @@ function App() {
           <Fragment>
             <div className='App'>
               <Switch>
-                <PrivateRoute exact path = '/' component={Dashboard}/>
+                <PrivateRoute exact path = '/' component={TotalExpense}/>
                 <PrivateRoute exact path = '/add' component={AddExpense}/>
                 <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
                 <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>

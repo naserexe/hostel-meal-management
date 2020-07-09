@@ -34,3 +34,14 @@ exports.deleteExpenses = async (req, res, next) => {
   await Expense.findByIdAndDelete(req.params.id);
   res.status(200).json({ success: true, data: 'Successfully deleted' });
 };
+
+// @desc    Get total expense cost
+// @route   POST /api/expenses/cost
+// @access  Private
+exports.getTotalExpenseCost = asyncHandler(async (req, res, next) => {
+  const expense = await Expense.find({ user: req.user.id });
+
+  const totalCost = expense.reduce((prev, nextValue) => prev + nextValue.cost, 0);
+
+  res.status(200).json({ success: true, data: totalCost });
+});

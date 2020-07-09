@@ -5,11 +5,12 @@ import ExpenseContext from './expenseContext';
 import expenseReducer from './expenseReducer'
 
 
-import { ADD_EXPENSE_FAIL, ADD_EXPENSE, EXPENSES_ERROR, GET_EXPENSES } from '../types';
+import { ADD_EXPENSE, EXPENSES_ERROR, GET_EXPENSES, GET_TOTAL_EXPENSE_COST } from '../types';
 
 const ExpenseState = props => {
   const initialState = {
     expenses:[],
+    totalExpenseCost: null,
     error: null
   }
 
@@ -48,15 +49,29 @@ const ExpenseState = props => {
       console.log('Error add');
       dispatch({type: EXPENSES_ERROR, payload: err.response.data.error})
     }
+  }
+
+  // Get total expense cost
+  const getTotalExpenseCost = async () => {
+    try {
+      const res = await axios.get('/api/expenses/cost');
+      console.log(res)
+
+      dispatch({type: GET_TOTAL_EXPENSE_COST, payload: res.data.data})
+    } catch (err) {
+      dispatch({type: EXPENSES_ERROR, payload: err.response.data.error})
+    }
   } 
 
   return(
     <ExpenseContext.Provider
     value={{
       expenses: state.expenses,
+      totalExpenseCost: state.totalExpenseCost,
       error: state.error,
       addExpense,
-      getExpenses
+      getExpenses,
+      getTotalExpenseCost
     }}
     >
       {props.children}

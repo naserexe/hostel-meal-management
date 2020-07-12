@@ -27,11 +27,28 @@ const sendTokenResponse = (user, statusCode, res) => {
 // @desc    Register a user
 // @route   POST /api/auth/register
 // @access  Public
-exports.register = asyncHandler(async (req, res) => {
-  // Create manager
-  const user = await User.create(req.body);
+exports.register = asyncHandler(async (req, res, next) => {
+  if(req.body.role == 'boarder'){
+    const hostelName = await User.findOne({hostelName: req.body.hostelName})
+    if(!hostelName){
+      return next(new ErrorResponse('Your hostel not created yet', 404))
+    }else{
+      const user = await User.create(req.body);
+      sendTokenResponse(user, 201, res);
+    }
+  }else{
+    // Check for hostel if already exist
+    const isHostelName = await User.findOne({hostelName: req.body.hostelName})
+    if(isHostelName){
+      return next(new ErrorResponse('Hostel name you entered already exist', 401))
+    }
 
-  sendTokenResponse(user, 200, res);
+    // Create new user
+    const user = await User.create(req.body);
+
+    sendTokenResponse(user, 200, res);
+  }
+  
 });
 
 // @desc    Logging user
@@ -67,4 +84,14 @@ exports.getMe = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
 
   res.status(200).json({ success: true, data: user });
+});
+
+
+// @desc    Get all member
+// @route   POST /api/deposit
+// @access  Private
+exports.getAllMember = asyncHandler( async (req, res, next)  => {
+  const member = await User.find({hostelName: req.user.hostelName});
+
+  res.status(200).json({success: true, data: member});
 });

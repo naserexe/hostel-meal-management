@@ -35,8 +35,9 @@ const ManagerSchema = new mongoose.Schema({
     minlength: [5, 'hostel name should be more than 5 character'],
     // eslint-disable-next-line
     match: [/^[a-zA-Z0-9\-]+$/, 'Your hostel name is not valid. Only characters A-Z, a-z, 0-9 and - are acceptable.'],
-    unique: true,
   },
+  depositAmount: Number,
+  dueAmount: Number
 });
 
 // Encrypt password using bcryptjs

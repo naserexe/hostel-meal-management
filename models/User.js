@@ -36,7 +36,10 @@ const ManagerSchema = new mongoose.Schema({
     // eslint-disable-next-line
     match: [/^[a-zA-Z0-9\-]+$/, 'Your hostel name is not valid. Only characters A-Z, a-z, 0-9 and - are acceptable.'],
   },
-  depositAmount: Number,
+  depositAmount: {
+    type: Number,
+    default:0
+  },
   dueAmount: Number
 });
 

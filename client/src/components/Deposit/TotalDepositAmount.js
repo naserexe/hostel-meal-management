@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, Fragment } from 'react'
-import { Card, Typography, Space} from 'antd';
+import React, { useContext, useEffect } from 'react'
+import { Card, Typography} from 'antd';
 
 import DepositContext from '../context/deposit/depositContext'
 
-import DashboardLayout from '../layout/Dashboard/DashboardLayout'
-
-
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 const TotalDepositAmount = () => {
   const depositContext = useContext(DepositContext);

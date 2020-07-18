@@ -1,13 +1,14 @@
-import { GET_TOTAL_DEPOSIT_AMOUNT, DEPOSIT_ERROR } from '../types';
+import { GET_ALL_BOARDER, BOARDER_ERROR } from '../types';
+import BoarderState from './BoarderState';
 
 export default (state, action) => {
   switch(action.type){
-    case GET_TOTAL_DEPOSIT_AMOUNT:
+    case GET_ALL_BOARDER:
       return {
         ...state,
-        totalDepositAmount: action.payload
+        boarders: action.payload
       }
-    case DEPOSIT_ERROR:
+    case BOARDER_ERROR:
       return {
         ...state,
         error: action.payload

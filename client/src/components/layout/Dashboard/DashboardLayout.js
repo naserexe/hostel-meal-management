@@ -30,19 +30,19 @@ const Dashboard = (props) => {
           height: '100vh',
           left: 0,
         }}>
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+          <div className="logo"/>
+          <Menu theme="dark" mode="inline" >
 
           <Menu.Item key="0" icon={<DashboardFilled />}>
               <Link style={{color: 'white'}} to='/'>Dashboard</Link>
             </Menu.Item>
 
             <Menu.Item key="1" icon={<DollarCircleFilled />}>
-              <Link style={{color: 'white'}} to='/add'>Add Expense</Link>
+              <Link style={{color: 'white'}} to='/expense'>Add Expense</Link>
             </Menu.Item>
 
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
+            <Link style={{color: 'white'}} to='/deposit'>Deposit Money</Link>
             </Menu.Item>
             
             <Menu.Item key="3" icon={<UploadOutlined />}>

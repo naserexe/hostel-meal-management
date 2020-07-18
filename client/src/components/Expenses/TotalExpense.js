@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
-import { Card, Typography, Space} from 'antd';
+import { Card, Typography} from 'antd';
 
 import ExpenseContext from '../context/expense/expenseContext'
 
-import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
 
-const { Text, Link } = Typography;
+
+const { Text } = Typography;
 
 const TotalExpense = () => {
   const expenseContext = useContext(ExpenseContext);

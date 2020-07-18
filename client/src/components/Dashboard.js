@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import DashboardLayout from './layout/Dashboard/DashboardLayout';
 
 import TotalDepositAmount from './Deposit/TotalDepositAmount';
 import TotalExpense from './Expenses/TotalExpense'
 
-import AuthContext from './context/auth/authContext';
+
 
 import { Row, Col } from 'antd';
 

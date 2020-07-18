@@ -1,16 +1,25 @@
-import React, {useState, useContext, useEffect} from 'react';
-import { withRouter, Link} from 'react-router-dom'
+import React, {useState, useEffect,  useContext} from 'react';
+import { withRouter} from 'react-router-dom'
 
 import { Form, Input, Button, Select } from 'antd';
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
 import ExpenseContext from '../context/expense/expenseContext'
+import BoarderContext from '../context/boarder/boarderContext'
 
 const { Option } = Select;
 const AddExpense = (props) => {
 
+  const boarderContext = useContext(BoarderContext);
+  const { getAllBoarder, boarders } = boarderContext;
+
   const expenseContext = useContext(ExpenseContext);
-  const { addExpense, getExpenses } = expenseContext;
+  const { addExpense } = expenseContext;
+
+  useEffect(() => {
+    getAllBoarder();
+    // eslint-disable-next-line
+  }, [])
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -19,8 +28,15 @@ const AddExpense = (props) => {
 
 
   const onSubmit = () => {
-    addExpense({name, type, cost})
+    addExpense({name, type, cost, marketer})
   }
+
+  const boarder = boarders.map(boarder => {
+    return {
+      label: boarder.name,
+      value: boarder._id
+    }
+  })
 
   return (
     <DashboardLayout>
@@ -83,11 +99,10 @@ const AddExpense = (props) => {
           <Select
             placeholder="Select Marketer"
             onChange={value => setMarketer(value)}
+            options={boarder}
             allowClear
-          >
-            <Option value="manager">Manager</Option>
-            <Option value="boarder">Boarder</Option>
-          </Select>
+          />
+            
         </Form.Item>
 
         <Form.Item>

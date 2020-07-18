@@ -5,7 +5,7 @@ import DepositContext from './depositContext';
 import depositReducer from './depositReducer'
 
 
-import { GET_TOTAL_DEPOSIT_AMOUNT, DEPOSIT_ERROR } from '../types';
+import { GET_TOTAL_DEPOSIT_AMOUNT, DEPOSIT_ERROR, ADD_DEPOSIT } from '../types';
 
 const DepositState = props => {
   const initialState = {
@@ -28,6 +28,25 @@ const DepositState = props => {
     }
   } 
 
+  // Deposit money to boarder
+  const addDeposit = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/deposit/', formData, config);
+      console.log(res)
+      dispatch({
+        type: ADD_DEPOSIT
+      });
+    } catch (err) {
+      console.log('Error add');
+      dispatch({type: DEPOSIT_ERROR, payload: err.response.data.error})
+    }
+  } 
 
   return(
     <DepositContext.Provider
@@ -35,6 +54,7 @@ const DepositState = props => {
       totalDepositAmount: state.totalDepositAmount,
       error: state.error,
       getTotalDepositedAmount,
+      addDeposit
 
     }}
     >

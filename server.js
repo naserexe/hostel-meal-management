@@ -11,6 +11,7 @@ const connectDB = require('./config/db');
 const auth = require('./routes/auth');
 const test = require('./routes/authTest');
 const expenses = require('./routes/expenses');
+const deposit = require('./routes/deposit');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -37,6 +38,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/auth', auth);
 app.use('/api/test', test);
 app.use('/api/expenses', expenses);
+app.use('/api/deposit', deposit);
 
 
 const PORT = process.env.PORT || 5000;

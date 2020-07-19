@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ExpenseSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
     required: [true, 'Please add a name'],
   },

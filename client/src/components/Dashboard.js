@@ -1,9 +1,14 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import DashboardLayout from './layout/Dashboard/DashboardLayout';
 
-import AuthContext from './context/auth/authContext';
+import TotalDepositAmount from './Deposit/TotalDepositAmount';
+import TotalExpense from './Expenses/TotalExpense'
 
-const Dashboard = (props) => {
+
+
+import { Row, Col } from 'antd';
+
+const Dashboard = () => {
   //const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -15,7 +20,10 @@ const Dashboard = (props) => {
 
   return (
     <DashboardLayout>
-      {props.children}
+      <Row>
+      <Col span={4}><TotalExpense/></Col>
+      <Col span={4}><TotalDepositAmount/></Col>
+    </Row>
     </DashboardLayout>
   )
 }

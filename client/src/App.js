@@ -12,13 +12,15 @@ import Registration from './components/auth/Register'
 
 import AuthState from './components/context/auth/AuthState';
 import ExpenseState from './components/context/expense/ExpenseState';
-
+import DepositState from './components/context/deposit/DepositState';
+import BoarderState from './components/context/boarder/BoarderState';
 
 import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 import PrivateRoute from './components/Routing/PrivateRoute';
-import TotalExpense from './components/Expenses/TotalExpense';
+
+import AddDeposit from './components/Deposit/AddDeposit';
 
 
 if (localStorage.token) {
@@ -29,18 +31,23 @@ function App() {
   return (
     <AuthState>
       <ExpenseState>
-        <BrowserRouter>
-          <Fragment>
-            <div className='App'>
-              <Switch>
-                <PrivateRoute exact path = '/' component={TotalExpense}/>
-                <PrivateRoute exact path = '/add' component={AddExpense}/>
-                <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
-                <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
-              </Switch>
-            </div>
-          </Fragment>
-        </BrowserRouter>
+        <DepositState>
+          <BoarderState>
+            <BrowserRouter>
+              <Fragment>
+                <div className='App'>
+                  <Switch>
+                    <PrivateRoute exact path = '/' component={Dashboard}/>
+                    <PrivateRoute exact path = '/expense' component={AddExpense}/>
+                    <PrivateRoute exact path = '/deposit' component={AddDeposit}/>
+                    <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
+                    <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
+                  </Switch>
+                </div>
+              </Fragment>
+            </BrowserRouter>
+          </BoarderState>
+        </DepositState>
       </ExpenseState>
     </AuthState>
   );

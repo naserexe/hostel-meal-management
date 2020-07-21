@@ -12,6 +12,8 @@ const auth = require('./routes/auth');
 const test = require('./routes/authTest');
 const expenses = require('./routes/expenses');
 const deposit = require('./routes/deposit');
+const meal = require('./routes/meal');
+const calculation = require('./routes/calculation');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -39,7 +41,8 @@ app.use('/api/auth', auth);
 app.use('/api/test', test);
 app.use('/api/expenses', expenses);
 app.use('/api/deposit', deposit);
-
+app.use('/api/meal', meal);
+app.use('/api/calculation', calculation);
 
 const PORT = process.env.PORT || 5000;
 
@@ -50,7 +53,6 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
 }
-
 
 // Error handler
 app.use(errorHandler);

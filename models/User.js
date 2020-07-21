@@ -38,9 +38,13 @@ const ManagerSchema = new mongoose.Schema({
   },
   depositAmount: {
     type: Number,
-    default:0
+    default: 0,
   },
-  dueAmount: Number
+  dueAmount: Number,
+  meal: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // Encrypt password using bcryptjs

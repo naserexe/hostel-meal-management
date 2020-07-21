@@ -1,6 +1,8 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
+const { getTotalExpenseCost } = require('../helper/dataRetrieveHelper')
+
 const Expense = require('../models/Expense');
 
 // @desc    Add Expense
@@ -39,9 +41,8 @@ exports.deleteExpenses = async (req, res, next) => {
 // @route   POST /api/expenses/cost
 // @access  Private
 exports.getTotalExpenseCost = asyncHandler(async (req, res, next) => {
-  const expense = await Expense.find({ user: req.user.id });
 
-  const totalCost = expense.reduce((prev, nextValue) => prev + nextValue.cost, 0);
+  const totalCost = await getTotalExpenseCost(req);
 
   res.status(200).json({ success: true, data: totalCost });
 });

@@ -12,11 +12,27 @@ exports.getTotalExpenseCost = asyncHandler(async (req) => {
 
 // Get total meal of a hostel
 exports.getTotalMeal = asyncHandler(async (req) => {
-  const depositAmount = await User.find({ hostelName: req.user.hostelName });
+  // const allMember = await User.find({ hostelName: req.user.hostelName });
+  // let count = 0;
 
-  const totalMeal = depositAmount
-    .reduce((prev, nextValue) => prev + nextValue.meal, 0);
-  return totalMeal;
+  // allMember.map((singleMealField) => {
+  //   singleMealField.meal.map((singleMealCount) => {
+  //     count += singleMealCount.mealCount;
+  //   });
+  // });
+
+  const totalMeal = await User.aggregate([
+    { $match: { hostelName: req.user.hostelName } },
+    { $unwind: '$meal' },
+    {
+      $group: {
+        _id: req.user.hostelName,
+        totalMeal: { $sum: '$meal.mealCount' },
+      },
+    },
+  ]);
+
+  return totalMeal[0].totalMeal;
 });
 
 // Get total deposited amount

@@ -9,14 +9,14 @@ const User = require('../models/User');
 // @route   POST /api/meal
 // @access  Private
 exports.addMeal = asyncHandler(async (req, res, next) => {
-  if (!req.body.meal || !req.body.user_id) {
+  if (!req.body.mealCount || !req.body.user_id) {
     return next(new ErrorResponse('Meal and user_id is required', 401));
   }
 
   const addMealToUser = await User
     .findOneAndUpdate(
       { _id: req.body.user_id, hostelName: req.user.hostelName },
-      { $inc: { meal: req.body.meal } },
+      { $push: { meal: { $each: [{ mealCount: req.body.mealCount }] } } },
       { new: true },
     );
 

@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const MealSchema = new mongoose.Schema({
+  mealCount: {
+    type: Number,
+  },
+  dateAdded: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const ManagerSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -41,10 +51,7 @@ const ManagerSchema = new mongoose.Schema({
     default: 0,
   },
   dueAmount: Number,
-  meal: {
-    type: Number,
-    default: 0,
-  },
+  meal: [MealSchema],
 });
 
 // Encrypt password using bcryptjs

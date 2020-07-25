@@ -10,7 +10,7 @@ export default (state, action) => {
     case ADD_EXPENSE:
       return {
         ...state,
-        expenses: action.payload
+        expenses: [action.payload, ...state.expenses]
       }
     
       case GET_EXPENSES:

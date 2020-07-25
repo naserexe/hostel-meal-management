@@ -6,13 +6,15 @@ import {
     MenuFoldOutlined,
     DollarCircleFilled,
     VideoCameraOutlined,
-    UploadOutlined,
+    MedicineBoxFilled,
+    ReadFilled,
     DashboardFilled,
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
 
 const { Header, Sider, Content, Footer } = Layout;
+const { SubMenu } = Menu;
 
 
 const Dashboard = (props) => {
@@ -37,18 +39,21 @@ const Dashboard = (props) => {
               <Link style={{color: 'white'}} to='/'>Dashboard</Link>
             </Menu.Item>
 
-            <Menu.Item key="1" icon={<DollarCircleFilled />}>
-              <Link style={{color: 'white'}} to='/expense'>Add Expense</Link>
+            <SubMenu key="sub2" icon={<DollarCircleFilled />} title="Expenses">
+              <Menu.Item key="1" icon={<MedicineBoxFilled />}>
+                <Link style={{color: 'white'}} to='/expense/add'>Add Expense</Link>
+              </Menu.Item>
+
+              <Menu.Item key="3" icon={<ReadFilled />}>
+              <Link style={{color: 'white'}} to='/expense/view'>View All Expenses</Link>
             </Menu.Item>
+            </SubMenu>
+
 
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            <Link style={{color: 'white'}} to='/deposit'>Deposit Money</Link>
+              <Link style={{color: 'white'}} to='/deposit'>Deposit Money</Link>
             </Menu.Item>
             
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
-
           </Menu>
         </Sider>
         <Layout className="site-layout">

@@ -4,8 +4,6 @@ import DashboardLayout from './layout/Dashboard/DashboardLayout';
 import TotalDepositAmount from './Deposit/TotalDepositAmount';
 import TotalExpense from './Expenses/TotalExpense'
 
-
-
 import { Row, Col } from 'antd';
 
 const Dashboard = () => {
@@ -21,9 +19,9 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       <Row>
-      <Col span={4}><TotalExpense/></Col>
-      <Col span={4}><TotalDepositAmount/></Col>
-    </Row>
+        <Col span={4}><TotalExpense/></Col>
+        <Col span={4}><TotalDepositAmount/></Col>
+      </Row>
     </DashboardLayout>
   )
 }

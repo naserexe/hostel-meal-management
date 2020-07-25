@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+
+const { ObjectId } = mongoose.Types.ObjectId;
 const User = require('../models/User');
 const Expense = require('../models/Expense');
 const asyncHandler = require('../middleware/async');
@@ -43,3 +46,19 @@ exports.getTotalMeal = asyncHandler(async (req) => {
 //     .reduce((prev, nextValue) => prev + nextValue.depositAmount, 0);
 //   return totalDepositAmount;
 // });
+
+// Get total meal of a boarder
+exports.getTotalMealOfaBoarder = asyncHandler(async (req, boarderId) => {
+  const totalMeal = await User.aggregate([
+    { $match: { _id: ObjectId(boarderId) } },
+    { $unwind: '$meal' },
+    {
+      $group: {
+        _id: req.user.hostelName,
+        totalMeal: { $sum: '$meal.mealCount' },
+      },
+    },
+  ]);
+
+  return totalMeal[0].totalMeal;
+});

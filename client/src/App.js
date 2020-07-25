@@ -21,6 +21,7 @@ import './App.css';
 import PrivateRoute from './components/Routing/PrivateRoute';
 
 import AddDeposit from './components/Deposit/AddDeposit';
+import { ViewExpenses } from './components/Expenses/ViewExpenses';
 
 
 if (localStorage.token) {
@@ -38,7 +39,8 @@ function App() {
                 <div className='App'>
                   <Switch>
                     <PrivateRoute exact path = '/' component={Dashboard}/>
-                    <PrivateRoute exact path = '/expense' component={AddExpense}/>
+                    <PrivateRoute exact path = '/expense/add' component={AddExpense}/>
+                    <PrivateRoute exact path = '/expense/view' component={ViewExpenses}/>
                     <PrivateRoute exact path = '/deposit' component={AddDeposit}/>
                     <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
                     <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>

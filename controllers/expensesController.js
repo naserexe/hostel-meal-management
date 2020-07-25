@@ -1,7 +1,7 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
-const { getTotalExpenseCost } = require('../helper/dataRetrieveHelper')
+const { getTotalExpenseCost } = require('../helper/dataRetrieveHelper');
 
 const Expense = require('../models/Expense');
 
@@ -19,8 +19,10 @@ exports.addExpense = asyncHandler(async (req, res) => {
 // @desc    Get all expense
 // @route   POST /api/expenses
 // @access  Private
-exports.getAllExpense = asyncHandler(async (req, res, next) => {
-  const expense = await Expense.find({ user: req.user.id });
+exports.getAllExpense = asyncHandler(async (req, res) => {
+  const expense = await Expense.find({ user: req.user.id })
+    .populate('marketer', 'name')
+    .sort({ dateAdded: -1 });
 
   if (!expense) {
     return res.status(404).json({ success: false, data: 'No expenses found' });
@@ -41,7 +43,6 @@ exports.deleteExpenses = async (req, res, next) => {
 // @route   POST /api/expenses/cost
 // @access  Private
 exports.getTotalExpenseCost = asyncHandler(async (req, res, next) => {
-
   const totalCost = await getTotalExpenseCost(req);
 
   res.status(200).json({ success: true, data: totalCost });

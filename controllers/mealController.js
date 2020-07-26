@@ -1,7 +1,7 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 
-const { getTotalMeal, getTotalMealOfaBoarder, } = require('../helper/dataRetrieveHelper');
+const { getTotalMeal, getTotalMealOfaBoarder } = require('../helper/dataRetrieveHelper');
 
 const User = require('../models/User');
 
@@ -18,7 +18,7 @@ exports.addMeal = asyncHandler(async (req, res, next) => {
       { _id: req.body.user_id, hostelName: req.user.hostelName },
       { $push: { meal: { $each: [{ mealCount: req.body.mealCount }] } } },
       { new: true },
-    );
+    ).select('meal name');
 
   res.status(200).json({ success: true, data: addMealToUser });
 });
@@ -51,4 +51,15 @@ exports.getSingleBoarderTotalMeal = asyncHandler(async (req, res, next) => {
   if (!totalMeal) return next(new ErrorResponse('No boarder found with the id', 404));
 
   res.status(200).json({ success: true, data: totalMeal });
+});
+
+// @desc    Get All Meal List
+// @route   GET /api/meal/
+// @access  Private
+exports.getAllMealList = asyncHandler(async (req, res) => {
+  const allMealList = await User.find({ hostelName: req.user.hostelName })
+    .select('meal name')
+    .sort({ dateAdded: -1 });
+
+  res.status(200).json({ success: true, data: allMealList });
 });

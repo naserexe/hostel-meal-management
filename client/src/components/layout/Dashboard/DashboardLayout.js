@@ -39,14 +39,28 @@ const Dashboard = (props) => {
               <Link style={{color: 'white'}} to='/'>Dashboard</Link>
             </Menu.Item>
 
-            <SubMenu key="sub2" icon={<DollarCircleFilled />} title="Expenses">
+            <SubMenu key="expense" icon={<DollarCircleFilled />} title="Expenses">
               <Menu.Item key="1" icon={<MedicineBoxFilled />}>
                 <Link style={{color: 'white'}} to='/expense/add'>Add Expense</Link>
               </Menu.Item>
 
               <Menu.Item key="3" icon={<ReadFilled />}>
-              <Link style={{color: 'white'}} to='/expense/view'>View All Expenses</Link>
-            </Menu.Item>
+                <Link style={{color: 'white'}} to='/expense/view'>View All Expenses</Link>
+              </Menu.Item>
+            </SubMenu>
+
+            <SubMenu key="meal" icon={<DollarCircleFilled />} title="Meal">
+              <Menu.Item key="1" icon={<MedicineBoxFilled />}>
+                <Link style={{color: 'white'}} to='/meal/add'>Add Meal</Link>
+              </Menu.Item>
+
+              <Menu.Item key="3" icon={<ReadFilled />}>
+                <Link style={{color: 'white'}} to='/meal/view'>View Meal Chart</Link>
+              </Menu.Item>
+
+              <Menu.Item key="4" icon={<ReadFilled />}>
+                <Link style={{color: 'white'}} to='/meal/boarder'>View Meal By Boarder</Link>
+              </Menu.Item>
             </SubMenu>
 
 

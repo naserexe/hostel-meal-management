@@ -3,33 +3,33 @@ import { Form, Input, Button, Select } from 'antd';
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
 import BoarderContext from '../context/boarder/boarderContext';
-import DipositContext from '../context/deposit/depositContext'
+import DepositContext from '../context/deposit/depositContext'
 
- const AddDeposit = () => {
-    const boarderContext = useContext(BoarderContext);
-    const { getAllBoarder, boarders } = boarderContext;
+const AddDeposit = () => {
+  const boarderContext = useContext(BoarderContext);
+  const { getAllBoarder, boarders } = boarderContext;
 
-    const dipositContext = useContext(DipositContext);
-    const { addDeposit } = dipositContext;
+  const depositContext = useContext(DepositContext);
+  const { addDeposit } = depositContext;
 
-    useEffect(() => {
-        getAllBoarder();
-        // eslint-disable-next-line
-      }, [])
+  useEffect(() => {
+      getAllBoarder();
+      // eslint-disable-next-line
+}, [])
 
-     const [depositAmount, setDepositAmount] = useState('');
-     const [user_id, setUser_id] = useState('')
+  const [depositAmount, setDepositAmount] = useState('');
+  const [user_id, setUser_id] = useState('')
 
-     const boarder = boarders.map(boarder => {
-        return {
-          label: boarder.name,
-          value: boarder._id
-        }
-      });
-
-    const onSubmit = () => {
-        addDeposit({depositAmount, user_id})
+  const boarder = boarders.map(boarder => {
+    return {
+      label: boarder.name,
+      value: boarder._id
     }
+  });
+
+const onSubmit = () => {
+    addDeposit({depositAmount, user_id})
+}
 
     return (
         <DashboardLayout>

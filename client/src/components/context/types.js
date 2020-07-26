@@ -22,3 +22,9 @@ export const DEPOSIT_ERROR = 'DEPOSIT_ERROR';
 // Boarder Context
 export const GET_ALL_BOARDER = 'GET_ALL_BOARDER';
 export const BOARDER_ERROR = 'BOARDER_ERROR';
+
+// Meal Context
+export const ADD_MEAL = 'ADD_MEAL';
+export const MEAL_ERROR = 'MEAL_ERROR';
+export const GET_SINGLE_BOARDER_MEAL = 'GET_SINGLE_BOARDER_MEAL';
+export const GET_ALL_MEAL = 'GET_ALL_MEAL';

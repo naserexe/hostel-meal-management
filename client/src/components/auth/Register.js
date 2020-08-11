@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { withRouter, Link} from 'react-router-dom'
 
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, notification } from 'antd';
 
 import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined } from '@ant-design/icons';
 
@@ -11,7 +11,7 @@ const { Option } = Select;
 const Register = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { register, isAuthenticated,loadUser } = authContext;
+  const { register, isAuthenticated,loadUser, error } = authContext;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,9 +26,19 @@ const Register = (props) => {
     }
   },[isAuthenticated])
 
+  const openNotificationWithIcon = type => {
+    notification[type]({
+      message: 'Authentication Error',
+      description: error,
+    });
+  };
+
 
   const onSubmit = () => {
     register({name, email, password, hostelName, role});
+    if (error != null) {
+      openNotificationWithIcon('error');
+    }
   }
 
   return (
@@ -76,6 +86,7 @@ const Register = (props) => {
           rules={[
             {
               required: true,
+              message: 'Please select your role'
             },
           ]}
         >

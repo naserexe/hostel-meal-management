@@ -5,7 +5,7 @@ import authReducer from './authReducer'
 
 import setAuthToken from '../../../utils/setAuthToken'
 
-import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL } from '../types';
+import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, CLEAR_ERRORS } from '../types';
 
 const AuthState = props => {
   const initialState = {
@@ -34,8 +34,10 @@ const AuthState = props => {
       });
       loadUser();
     } catch (err) {
-      console.log(err.response.data);
       dispatch({type: REGISTER_FAIL, payload: err.response.data.error})
+      setTimeout(() => {
+        dispatch({type: CLEAR_ERRORS})
+      }, 3000)
     }
   } 
 

@@ -12,13 +12,22 @@ import Registration from './components/auth/Register'
 
 import AuthState from './components/context/auth/AuthState';
 import ExpenseState from './components/context/expense/ExpenseState';
-
+import DepositState from './components/context/deposit/DepositState';
+import BoarderState from './components/context/boarder/BoarderState';
+import MealState from './components/context/meal/mealState';
+import CalculationState from './components/context/calculation/CalculationState';
 
 import setAuthToken from './utils/setAuthToken';
+import PrivateRoute from './components/Routing/PrivateRoute';
 
 import './App.css';
-import PrivateRoute from './components/Routing/PrivateRoute';
-import TotalExpense from './components/Expenses/TotalExpense';
+
+import AddDeposit from './components/Deposit/AddDeposit';
+import { ViewExpenses } from './components/Expenses/ViewExpenses';
+import AddMeal from './components/Meal/AddMeal';
+import { MealChart } from './components/Meal/MealChart';
+import { MealByBoarder } from './components/Meal/MealByBoarder';
+import Calculation from './components/Calculation/Calculation'
 
 
 if (localStorage.token) {
@@ -29,18 +38,32 @@ function App() {
   return (
     <AuthState>
       <ExpenseState>
-        <BrowserRouter>
-          <Fragment>
-            <div className='App'>
-              <Switch>
-                <PrivateRoute exact path = '/' component={TotalExpense}/>
-                <PrivateRoute exact path = '/add' component={AddExpense}/>
-                <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
-                <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
-              </Switch>
-            </div>
-          </Fragment>
-        </BrowserRouter>
+        <DepositState>
+          <BoarderState>
+            <MealState>
+              <CalculationState>
+                <BrowserRouter>
+                  <Fragment>
+                    <div className='App'>
+                      <Switch>
+                        <PrivateRoute exact path = '/' component={Dashboard}/>
+                        <PrivateRoute exact path = '/expense/add' component={AddExpense}/>
+                        <PrivateRoute exact path = '/expense/view' component={ViewExpenses}/>
+                        <PrivateRoute exact path = '/meal/add' component={AddMeal}/>
+                        <PrivateRoute exact path = '/meal/view' component={MealChart}/>
+                        <PrivateRoute exact path = '/meal/boarder' component={MealByBoarder}/>
+                        <PrivateRoute exact path = '/deposit' component={AddDeposit}/>
+                        <PrivateRoute exact path = '/calculation' component={Calculation}/>
+                        <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
+                        <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
+                      </Switch>
+                    </div>
+                  </Fragment>
+                </BrowserRouter>
+              </CalculationState>
+            </MealState>
+          </BoarderState>
+        </DepositState>
       </ExpenseState>
     </AuthState>
   );

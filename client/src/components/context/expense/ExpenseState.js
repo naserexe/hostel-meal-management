@@ -28,7 +28,7 @@ const ExpenseState = props => {
       const res = await axios.post('/api/expenses', formData, config);
       console.log(res)
       dispatch({
-        type: ADD_EXPENSE, payload: res.data
+        type: ADD_EXPENSE, payload: res.data.data
       });
     } catch (err) {
       console.log('Error add');

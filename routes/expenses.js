@@ -1,6 +1,11 @@
 const router = require('express').Router();
 
-const { addExpense, getAllExpense, deleteExpenses, getTotalExpenseCost } = require('../controllers/expensesController');
+const {
+  addExpense,
+  getAllExpense,
+  deleteExpenses,
+  getTotalExpenseCost,
+} = require('../controllers/expensesController');
 
 const { protect, authorize } = require('../middleware/auth');
 

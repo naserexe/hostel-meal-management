@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const MealSchema = new mongoose.Schema({
+  mealCount: {
+    type: Number,
+  },
+  dateAdded: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const ManagerSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -35,8 +45,13 @@ const ManagerSchema = new mongoose.Schema({
     minlength: [5, 'hostel name should be more than 5 character'],
     // eslint-disable-next-line
     match: [/^[a-zA-Z0-9\-]+$/, 'Your hostel name is not valid. Only characters A-Z, a-z, 0-9 and - are acceptable.'],
-    unique: true,
   },
+  depositAmount: {
+    type: Number,
+    default: 0,
+  },
+  dueAmount: Number,
+  meal: [MealSchema],
 });
 
 // Encrypt password using bcryptjs

@@ -5,7 +5,6 @@ import './Navbar.css';
 
 import {  Menu } from 'antd';
 import { IdcardFilled,MessageFilled, HomeFilled,InfoCircleFilled, LockFilled } from '@ant-design/icons';
-const { SubMenu } = Menu;
 
 const Navbar = () => {
   const [current, setCurrent] = useState('home')

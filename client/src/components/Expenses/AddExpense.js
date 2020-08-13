@@ -7,7 +7,6 @@ import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 import ExpenseContext from '../context/expense/expenseContext'
 import BoarderContext from '../context/boarder/boarderContext'
 
-const { Option } = Select;
 const AddExpense = (props) => {
 
   const boarderContext = useContext(BoarderContext);

@@ -42,15 +42,17 @@ exports.finalCalculation = asyncHandler(async (req, res) => {
 
   const finalCalculatedData = [];
   await Promise.all(allBoarder.map(async (singleBoarder) => {
+    const { depositAmount } = singleBoarder;
     const totalMeal = await getTotalMealOfaBoarder(req, singleBoarder._id);
     const totalCost = Math.round(mealRate * totalMeal);
-    const dueOrGetReturn = singleBoarder.depositAmount - totalCost;
+    const dueOrGetReturn = depositAmount - totalCost;
 
     finalCalculatedData.push({
       name: singleBoarder.name,
       totalMeal,
-      totalCost,
       mealRate,
+      totalCost,
+      depositAmount,
       dueOrGetReturn,
     });
   }));

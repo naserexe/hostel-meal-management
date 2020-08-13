@@ -93,6 +93,7 @@ export const MealByBoarder = () => {
         pagination={{ pageSize: 10 }}
         scroll={{ y: 650 }}
         columns={columns}
+        // eslint-disable-next-line
         scroll={{ x: 1300 }}
         bordered={true}
         />) : null}

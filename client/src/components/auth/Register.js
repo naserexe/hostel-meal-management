@@ -24,6 +24,7 @@ const Register = (props) => {
     if(isAuthenticated){
       props.history.push('/');
     }
+    // eslint-disable-next-line
   },[isAuthenticated])
 
   const openNotificationWithIcon = type => {

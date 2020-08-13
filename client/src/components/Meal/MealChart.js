@@ -3,7 +3,7 @@ import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
 import MealContext from '../context/meal/mealContext'
 
-import { Table, Tag, Space } from 'antd';
+import { Table } from 'antd';
 
 export const MealChart = () => {
   const mealContext = useContext(MealContext);

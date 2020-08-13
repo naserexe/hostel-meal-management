@@ -6,7 +6,7 @@ import mealReducer from './mealReducer'
 
 
 import { GET_ALL_MEAL, GET_SINGLE_BOARDER_MEAL, ADD_MEAL, MEAL_ERROR } from '../types';
-import AddMeal from '../../Meal/AddMeal';
+
 
 
 const MealState = props => {

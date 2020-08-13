@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
-import { Table, Tag, Space } from 'antd';
+import { Table, Space } from 'antd';
 import {
   DeleteFilled,
   EditFilled

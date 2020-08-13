@@ -67,6 +67,10 @@ const Dashboard = (props) => {
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               <Link style={{color: 'white'}} to='/deposit'>Deposit Money</Link>
             </Menu.Item>
+
+            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              <Link style={{color: 'white'}} to='/calculation'>Calculation</Link>
+            </Menu.Item>
             
           </Menu>
         </Sider>

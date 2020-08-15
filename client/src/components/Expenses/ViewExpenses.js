@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
+import Notification from '../Notification/Notification'
 
 import { Table, Space } from 'antd';
 import {
@@ -47,7 +48,7 @@ const columns = [
 
 export const ViewExpenses = () => {
   const expenseContext = useContext(ExpenseContext);
-  const { expenses, getExpenses } = expenseContext;
+  const { expenses, getExpenses, error } = expenseContext;
 
   useEffect(() => {
     getExpenses();
@@ -80,6 +81,7 @@ export const ViewExpenses = () => {
 
   return (
     <DashboardLayout>
+      <Notification message={error ? error : false} type='warning'/>
       <Table dataSource={dataSource} columns={columns} />
     </DashboardLayout>
   )

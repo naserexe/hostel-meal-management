@@ -5,15 +5,25 @@ import MealContext from './mealContext';
 import mealReducer from './mealReducer'
 
 
-import { GET_ALL_MEAL, GET_SINGLE_BOARDER_MEAL, ADD_MEAL, MEAL_ERROR } from '../types';
+import {
+  GET_ALL_MEAL,
+  GET_SINGLE_BOARDER_MEAL,
+  ADD_MEAL,
+  MEAL_ERROR,
+  CLOSE_NOTIFICATION,
+  GET_TOTAL_MEAL_COUNT,
+  CLEAR_ERRORS,
+} from '../types';
 
 
 
 const MealState = props => {
   const initialState = {
     allMeal:[],
+    totalMealCount:null,
     boarderMeal:[],
-    error: null
+    error: null,
+    notification: false,
   }
 
   const [state, dispatch] = useReducer(mealReducer, initialState);
@@ -25,6 +35,21 @@ const MealState = props => {
       const res = await axios.get('/api/meal/meal-list');
 
       dispatch({type: GET_ALL_MEAL, payload: res.data.data})
+    } catch (err) {
+      dispatch({type: MEAL_ERROR, payload: err.response.data.error});
+      setTimeout(() => {
+        dispatch({type: CLEAR_ERRORS});
+      }, 3000);
+    }
+  }
+
+  // Get total meal count
+  const getTotalMealCount = async () => {
+    
+    try {
+      const res = await axios.get('/api/meal/');
+
+      dispatch({type: GET_TOTAL_MEAL_COUNT, payload: res.data.data})
     } catch (err) {
       dispatch({type: MEAL_ERROR, payload: err.response.data.error})
     }
@@ -45,6 +70,9 @@ const MealState = props => {
         type: ADD_MEAL,
         payload: res.data.data
       });
+      setTimeout(() => {
+        dispatch({type: CLOSE_NOTIFICATION})
+      }, 3000)
     } catch (err) {
       console.log('Error add');
       dispatch({type: MEAL_ERROR, payload: err.response.data.error})
@@ -70,11 +98,14 @@ const MealState = props => {
     <MealContext.Provider
       value={{
         allMeal: state.allMeal,
+        totalMealCount: state.totalMealCount,
         boarderMeal: state.boarderMeal,
         error: state.error,
+        notification: state.notification,
         addMeal,
         getAllMealList,
-        getSingleBoarderMeal
+        getSingleBoarderMeal,
+        getTotalMealCount,
       }}
     >
       {props.children}

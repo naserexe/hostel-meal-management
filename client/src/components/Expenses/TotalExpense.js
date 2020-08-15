@@ -20,10 +20,9 @@ const TotalExpense = () => {
   return (
       <>
         <Card title="Total Expense" style={{ width: 200, textAlign: 'center' }}>
-          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">{totalExpenseCost ? totalExpenseCost : 'Loading...'}</Text>
+          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">${totalExpenseCost >=0 ? totalExpenseCost : 'Loading...'}</Text>
         </Card>
       </>
- 
   )
 }
 

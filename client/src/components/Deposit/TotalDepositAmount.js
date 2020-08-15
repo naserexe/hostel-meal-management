@@ -16,8 +16,8 @@ const TotalDepositAmount = () => {
   }, [])
   return (
       <>
-        <Card title="Total Diposited Amount" style={{ width: 300, textAlign: 'center' }}>
-          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">{totalDepositAmount ? totalDepositAmount : 'Loading...'}</Text>
+        <Card title="Total Deposited Amount">
+          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">{totalDepositAmount >=0 ? totalDepositAmount : 'Loading...'}</Text>
         </Card>
       </>
   )

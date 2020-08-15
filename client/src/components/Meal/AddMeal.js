@@ -5,13 +5,15 @@ import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 import BoarderContext from '../context/boarder/boarderContext';
 import MealContext from '../context/meal/mealContext';
 
+import Notification from '../Notification/Notification'
+
 
 const AddMeal = () => {
   const boarderContext = useContext(BoarderContext);
   const { getAllBoarder, boarders } = boarderContext;
 
   const mealContext = useContext(MealContext);
-  const { addMeal } = mealContext;
+  const { addMeal, notification } = mealContext;
 
   const [mealCount, setMealCount] = useState('');
   const [user_id, setUser_id] = useState('')
@@ -35,6 +37,7 @@ const onSubmit = () => {
 
   return (
     <DashboardLayout>
+      <Notification message={notification ? 'Meal added successfully': false} type='success'/>
       <h1>Add Meal</h1>
         <Form
           name="normal_login"
@@ -45,14 +48,18 @@ const onSubmit = () => {
           onFinish={onSubmit}
           >
 
-
           <Form.Item
-          name="depositAmount"
+          name="mealCount"
           rules={[
               {
               min:1,
               required: true,
               message: 'Meal count should be at least 1 Number'
+              },
+              {
+                // eslint-disable-next-line
+                pattern: /^(0|[1-9][0-9]*)$/,
+                message: 'Input should be number'
               },
           ]}
           >

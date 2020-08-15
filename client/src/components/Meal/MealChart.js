@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react'
-import DashboardLayout from '../layout/Dashboard/DashboardLayout'
+import React, { useContext, useEffect } from 'react';
+import DashboardLayout from '../layout/Dashboard/DashboardLayout';
+import Notification from '../Notification/Notification'
 
 import MealContext from '../context/meal/mealContext'
 
@@ -7,7 +8,7 @@ import { Table } from 'antd';
 
 export const MealChart = () => {
   const mealContext = useContext(MealContext);
-  const { getAllMealList, allMeal } = mealContext;
+  const { getAllMealList, allMeal, error } = mealContext;
 
   useEffect(() => {
     getAllMealList();
@@ -42,6 +43,7 @@ export const MealChart = () => {
 
   return (
     <DashboardLayout>
+      <Notification message={error ? error : false} type='warning'/>
       <h1>Meal Chart</h1>
       <Table dataSource={dataSource} tableLayout='auto' pagination={{ pageSize: 1 }} scroll={{ y: 650 }} columns={columns} />
     </DashboardLayout>

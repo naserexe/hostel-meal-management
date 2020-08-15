@@ -1,9 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { withRouter, Link} from 'react-router-dom'
 
-import { Form, Input, Button, Select, notification } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 
 import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined } from '@ant-design/icons';
+
+import Notification from '../Notification/Notification'
 
 import AuthContext from '../context/auth/authContext'
 
@@ -22,28 +24,18 @@ const Register = (props) => {
   useEffect(() => {
     loadUser()
     if(isAuthenticated){
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
     // eslint-disable-next-line
   },[isAuthenticated])
 
-  const openNotificationWithIcon = type => {
-    notification[type]({
-      message: 'Authentication Error',
-      description: error,
-    });
-  };
-
-
   const onSubmit = () => {
     register({name, email, password, hostelName, role});
-    if (error != null) {
-      openNotificationWithIcon('error');
-    }
   }
 
   return (
     <div>
+      <Notification error={error} errorType='error'/>
       <Form
         name="normal_login"
         className="login-form"
@@ -58,11 +50,11 @@ const Register = (props) => {
             {
               min:4,
               required: true,
-              message: 'Username should be at least 4 character'
+              message: 'Name should be at least 4 character'
             },
           ]}
         >
-          <Input onChange={(e) => setName(e.target.value)} name='name' value={name} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input onChange={(e) => setName(e.target.value)} name='name' value={name} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Full name" />
         </Form.Item>
 
         <Form.Item

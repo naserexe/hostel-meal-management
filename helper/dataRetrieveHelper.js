@@ -34,7 +34,9 @@ exports.getTotalMeal = asyncHandler(async (req) => {
       },
     },
   ]);
-
+  if (totalMeal.length < 1) {
+    return 0;
+  }
   return totalMeal[0].totalMeal;
 });
 
@@ -60,5 +62,6 @@ exports.getTotalMealOfaBoarder = asyncHandler(async (req, boarderId) => {
     },
   ]);
 
+  if (totalMeal.length < 1) return 0;
   return totalMeal[0].totalMeal;
 });

@@ -46,7 +46,10 @@ function App() {
                   <Fragment>
                     <div className='App'>
                       <Switch>
-                        <PrivateRoute exact path = '/' component={Dashboard}/>
+                        <Route exact path = '/' component={Home}/>
+                        <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
+                        <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
+                        <PrivateRoute exact path = '/dashboard' component={Dashboard}/>
                         <PrivateRoute exact path = '/expense/add' component={AddExpense}/>
                         <PrivateRoute exact path = '/expense/view' component={ViewExpenses}/>
                         <PrivateRoute exact path = '/meal/add' component={AddMeal}/>
@@ -54,8 +57,6 @@ function App() {
                         <PrivateRoute exact path = '/meal/boarder' component={MealByBoarder}/>
                         <PrivateRoute exact path = '/deposit' component={AddDeposit}/>
                         <PrivateRoute exact path = '/calculation' component={Calculation}/>
-                        <Route exact path = '/login' render={() => <Home><Login/></Home>}/>
-                        <Route exact path = '/register' render={() => <Home><Registration/></Home>}/>
                       </Switch>
                     </div>
                   </Fragment>

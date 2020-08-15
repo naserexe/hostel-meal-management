@@ -11,10 +11,10 @@ const User = require('../models/User');
 // @desc    Get Meal Rate
 // @route   POST /api/meal
 // @access  Private
-exports.getMealRate = asyncHandler(async (req, res, next) => {
+exports.getMealRate = asyncHandler(async (req, res) => {
   const mealRate = await getMealRate(req);
 
-  if (!mealRate) return next(new ErrorResponse('Something went wrong!'));
+  // if (!mealRate) return next(new ErrorResponse('Something went wrong!'));
 
   res.status(200).json({ success: true, data: mealRate });
 });

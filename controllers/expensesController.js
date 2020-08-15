@@ -1,5 +1,5 @@
-const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
+const ErrorResponse = require('../utils/errorResponse');
 
 const { getTotalExpenseCost } = require('../helper/dataRetrieveHelper');
 
@@ -19,13 +19,13 @@ exports.addExpense = asyncHandler(async (req, res) => {
 // @desc    Get all expense
 // @route   POST /api/expenses
 // @access  Private
-exports.getAllExpense = asyncHandler(async (req, res) => {
+exports.getAllExpense = asyncHandler(async (req, res, next) => {
   const expense = await Expense.find({ user: req.user.id })
     .populate('marketer', 'name')
     .sort({ dateAdded: -1 });
 
-  if (!expense) {
-    return res.status(404).json({ success: false, data: 'No expenses found' });
+  if (!expense || expense.length < 1) {
+    return next(new ErrorResponse('No expenses added so far', 404));
   }
 
   res.status(200).json({ success: true, data: expense });
@@ -34,7 +34,7 @@ exports.getAllExpense = asyncHandler(async (req, res) => {
 // @desc    Delete Expenses
 // @route   POST /api/expenses
 // @access  Private
-exports.deleteExpenses = async (req, res, next) => {
+exports.deleteExpenses = async (req, res) => {
   await Expense.findByIdAndDelete(req.params.id);
   res.status(200).json({ success: true, data: 'Successfully deleted' });
 };
@@ -42,7 +42,7 @@ exports.deleteExpenses = async (req, res, next) => {
 // @desc    Get total expense cost
 // @route   POST /api/expenses/cost
 // @access  Private
-exports.getTotalExpenseCost = asyncHandler(async (req, res, next) => {
+exports.getTotalExpenseCost = asyncHandler(async (req, res) => {
   const totalCost = await getTotalExpenseCost(req);
 
   res.status(200).json({ success: true, data: totalCost });

@@ -36,7 +36,7 @@ const Dashboard = (props) => {
           <Menu theme="dark" mode="inline" >
 
           <Menu.Item key="0" icon={<DashboardFilled />}>
-              <Link style={{color: 'white'}} to='/'>Dashboard</Link>
+              <Link style={{color: 'white'}} to='/dashboard'>Dashboard</Link>
             </Menu.Item>
 
             <SubMenu key="expense" icon={<DollarCircleFilled />} title="Expenses">

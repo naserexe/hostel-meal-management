@@ -28,7 +28,12 @@ export const ADD_MEAL = 'ADD_MEAL';
 export const MEAL_ERROR = 'MEAL_ERROR';
 export const GET_SINGLE_BOARDER_MEAL = 'GET_SINGLE_BOARDER_MEAL';
 export const GET_ALL_MEAL = 'GET_ALL_MEAL';
+export const GET_TOTAL_MEAL_COUNT = 'GET_TOTAL_MEAL_COUNT';
+export const GET_MEAL_RATE = 'GET_MEAL_RATE';
 
 // Calculate
 export const GET_CALCULATION = 'GET_CALCULATION';
 export const CALCULATION_ERROR = 'CALCULATION_ERROR';
+
+// Notification
+export const CLOSE_NOTIFICATION = 'CLOSE_NOTIFICATION'

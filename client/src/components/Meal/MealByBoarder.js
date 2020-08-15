@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Form, Button, Select, Table} from 'antd';
+
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
+import Notification from '../Notification/Notification'
 
 import BoarderContext from '../context/boarder/boarderContext'
 import MealContext from '../context/meal/mealContext'
@@ -12,7 +14,8 @@ export const MealByBoarder = () => {
   
   const {
     getSingleBoarderMeal,
-    boarderMeal
+    boarderMeal,
+    error
   } = mealContext;
 
   const { getAllBoarder, boarders } = boarderContext;
@@ -54,6 +57,7 @@ export const MealByBoarder = () => {
 
   return (
     <DashboardLayout>
+      <Notification message={error ? error : false} type='warning'/>
       <Form
         name="normal_login"
         className="login-form"

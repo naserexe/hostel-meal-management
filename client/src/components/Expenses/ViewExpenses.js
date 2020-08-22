@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import moment from 'moment'
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 import Notification from '../Notification/Notification'
 
@@ -70,7 +71,7 @@ export const ViewExpenses = () => {
       cost: expense.cost,
       user: expense.marketer.name,
       type: expense.type,
-      dateAdded: expense.dateAdded,
+      dateAdded: moment(expense.dateAdded).format('Do MMMM YYYY, h:mm:ss a'),
       action: 
         <Space size='middle'>
           <DeleteFilled onClick={() => deleteExpense(expense._id)}/>

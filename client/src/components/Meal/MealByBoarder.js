@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import moment from 'moment'
 import { Form, Button, Select, Table} from 'antd';
 
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
@@ -8,7 +9,6 @@ import BoarderContext from '../context/boarder/boarderContext'
 import MealContext from '../context/meal/mealContext'
 
 export const MealByBoarder = () => {
-
   const boarderContext = useContext(BoarderContext)
   const mealContext = useContext(MealContext)
   
@@ -35,10 +35,11 @@ export const MealByBoarder = () => {
     }
   });
 
+
   const onSubmit = () => {
     getSingleBoarderMeal(boarder);
   }
-
+  
   const columns = [
     {
       title: 'Date Added (all screens)',
@@ -53,7 +54,6 @@ export const MealByBoarder = () => {
       responsive: ['sm'],
     },
   ];
-
 
   return (
     <DashboardLayout>
@@ -90,7 +90,7 @@ export const MealByBoarder = () => {
           </Button>
         </Form.Item>
       </Form>
-      {boarderMeal.length > 0 ? (
+      {boarderMeal.length > 1 ? (
       <Table
         dataSource={boarderMeal}
         tableLayout='auto'

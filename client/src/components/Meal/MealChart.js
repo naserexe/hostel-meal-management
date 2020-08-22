@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import moment from 'moment'
 import DashboardLayout from '../layout/Dashboard/DashboardLayout';
 import Notification from '../Notification/Notification'
 
@@ -37,7 +38,7 @@ export const MealChart = () => {
     return {
       name: singleMeal.name,
       meal: singleMeal.meal.map(m => (<p>{m.mealCount}</p>)),
-      dateAdded: singleMeal.meal.map(m => (<p>{m.dateAdded}</p>))
+      dateAdded: singleMeal.meal.map(m => (<p>{moment(m.dateAdded ).format('Do MMMM YYYY, h:mm:ss a')}</p>))
     }
   })
 

@@ -21,16 +21,16 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
     <Row>
-      <Col span={6} xs={{ order: 1 }} sm={{ order: 2 }} md={{ order: 3 }} lg={{ order: 4 }}>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
       <TotalDepositAmount/>
       </Col>
-      <Col span={6} xs={{ order: 2 }} sm={{ order: 1 }} md={{ order: 4 }} lg={{ order: 3 }}>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
       <TotalExpense/>
       </Col>
-      <Col span={6} xs={{ order: 3 }} sm={{ order: 4 }} md={{ order: 2 }} lg={{ order: 1 }}>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
       <TotalMeal/>
       </Col>
-      <Col span={6} xs={{ order: 4 }} sm={{ order: 3 }} md={{ order: 1 }} lg={{ order: 2 }}>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
       <MealRate/>
       </Col>
     </Row>

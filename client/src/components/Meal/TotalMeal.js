@@ -16,8 +16,10 @@ const TotalMeal = () => {
   }, [])
   return (
       <>
-        <Card title="Total Meal" >
-          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">{totalMealCount >=0 ? totalMealCount : 'Loading...'}</Text>
+        <Card title="Total Meal" loading={totalMealCount === null ? true : false}>
+          <Text style={{fontSize:'30px', color: '#13a8a8'}} level={2} strong={true} type="warning">
+            {totalMealCount >=0 ? totalMealCount : 'Loading...'}
+          </Text>
         </Card>
       </>
   )

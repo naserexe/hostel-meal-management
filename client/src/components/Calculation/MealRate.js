@@ -13,11 +13,15 @@ const MealRate = () => {
   useEffect(() => {
     getMealRate();
     // eslint-disable-next-line
-  }, [])
+  }, []);
+
+  
   return (
       <>
-        <Card title="Meal Rate">
-          <Text style={{fontSize:'50px'}} level={2} strong={true} type="warning">{mealRate >=0 ? mealRate : 'Loading...'}</Text>
+        <Card title="Meal Rate" loading={mealRate === null ? true : false}>
+          <Text style={{fontSize:'30px'}} level={2} strong={true} type="warning">
+            ${mealRate >=0 ? mealRate : 'Loading...'}
+          </Text>
         </Card>
       </>
   )

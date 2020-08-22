@@ -1,14 +1,18 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button, Row, Col } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     DollarCircleFilled,
-    VideoCameraOutlined,
+    BankOutlined,
     MedicineBoxFilled,
     ReadFilled,
     DashboardFilled,
+    ControlOutlined,
+    PercentageOutlined,
+    CoffeeOutlined,
+    PoweroffOutlined
 } from '@ant-design/icons';
 
 import './DashboardLayout.css';
@@ -49,7 +53,7 @@ const Dashboard = (props) => {
               </Menu.Item>
             </SubMenu>
 
-            <SubMenu key="meal" icon={<DollarCircleFilled />} title="Meal">
+            <SubMenu key="meal" icon={<CoffeeOutlined />} title="Meal">
               <Menu.Item key="1" icon={<MedicineBoxFilled />}>
                 <Link style={{color: 'white'}} to='/meal/add'>Add Meal</Link>
               </Menu.Item>
@@ -59,27 +63,36 @@ const Dashboard = (props) => {
               </Menu.Item>
 
               <Menu.Item key="4" icon={<ReadFilled />}>
-                <Link style={{color: 'white'}} to='/meal/boarder'>View Meal By Boarder</Link>
+                <Link style={{color: 'white'}} to='/meal/boarder'>Boarder Meal</Link>
               </Menu.Item>
             </SubMenu>
 
 
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="2" icon={<BankOutlined />}>
               <Link style={{color: 'white'}} to='/deposit'>Deposit Money</Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="2" icon={<PercentageOutlined />}>
               <Link style={{color: 'white'}} to='/calculation'>Calculation</Link>
+            </Menu.Item>
+
+            <Menu.Item key="2" icon={<ControlOutlined />}>
+              <Link style={{color: 'white'}} to='/advance'>Advanced option</Link>
             </Menu.Item>
             
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(sidebarToggle ? MenuUnfoldOutlined : MenuFoldOutlined, {
+            <Row>
+              <Col flex="1 1 100px">{React.createElement(sidebarToggle ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: toggle,
-            })}
+            })}</Col>
+              <Col flex="0 1 150px"><Button type='default' orientation="right" danger icon={<PoweroffOutlined />}>Logout</Button></Col>
+            </Row>
+            
+            
           </Header>
           <Content
             className="site-layout-background"

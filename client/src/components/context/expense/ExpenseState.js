@@ -11,7 +11,8 @@ import {
   GET_EXPENSES,
   GET_TOTAL_EXPENSE_COST,
   CLOSE_NOTIFICATION,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  DELETE_EXPENSE
 } from '../types';
 
 const ExpenseState = props => {
@@ -72,7 +73,20 @@ const ExpenseState = props => {
     } catch (err) {
       dispatch({type: EXPENSES_ERROR, payload: err.response.data.error})
     }
+  }
+
+   // Get total expense cost
+  const deleteExpense = async (id) => {
+    try {
+      const res = await axios.delete(`/api/expenses/${id}`);
+      console.log(res)
+
+      dispatch({type: DELETE_EXPENSE, payload: res.data.data})
+    } catch (err) {
+      dispatch({type: EXPENSES_ERROR, payload: err.response.data.error})
+    }
   } 
+
 
   return(
     <ExpenseContext.Provider
@@ -83,7 +97,8 @@ const ExpenseState = props => {
       error: state.error,
       addExpense,
       getExpenses,
-      getTotalExpenseCost
+      getTotalExpenseCost,
+      deleteExpense,
     }}
     >
       {props.children}

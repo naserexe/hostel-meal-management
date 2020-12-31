@@ -49,15 +49,15 @@ const columns = [
 
 export const ViewExpenses = () => {
   const expenseContext = useContext(ExpenseContext);
-  const { expenses, getExpenses, error } = expenseContext;
+  const { expenses, getExpenses, error, deleteExpense } = expenseContext;
 
   useEffect(() => {
     getExpenses();
     // eslint-disable-next-line
   },[]);
 
-  const deleteExpense = (id) => {
-    console.log(`delete Expense,${id}`)
+  const handleDelete = (id) => {
+    deleteExpense(id);
   }
 
   const editExpense = (id) => {
@@ -74,7 +74,7 @@ export const ViewExpenses = () => {
       dateAdded: moment(expense.dateAdded).format('Do MMMM YYYY, h:mm:ss a'),
       action: 
         <Space size='middle'>
-          <DeleteFilled onClick={() => deleteExpense(expense._id)}/>
+          <DeleteFilled onClick={() => handleDelete(expense._id)}/>
           <EditFilled onClick={() => editExpense(expense._id)}/>
         </Space>,
     }

@@ -5,6 +5,7 @@ import {
   GET_TOTAL_EXPENSE_COST,
   CLOSE_NOTIFICATION,
   CLEAR_ERRORS,
+  DELETE_EXPENSE,
 } from '../types';
 
 export default (state, action) => {
@@ -29,6 +30,11 @@ export default (state, action) => {
         ...state,
         expenses: [action.payload, ...state.expenses],
         notification: true
+      }
+    case DELETE_EXPENSE:
+      return {
+        ...state,
+        expenses: state.expenses.filter(expense => expense._id !== action.payload._id),
       }
     
       case GET_EXPENSES:

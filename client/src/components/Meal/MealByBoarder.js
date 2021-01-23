@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import moment from 'moment'
 import { Form, Button, Select, Table} from 'antd';
 
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
@@ -26,7 +25,7 @@ export const MealByBoarder = () => {
     getAllBoarder()
     
     // eslint-disable-next-line
-  },[])
+  },[]);
 
   const options = boarders.map(boarder => {
     return {
@@ -42,16 +41,16 @@ export const MealByBoarder = () => {
   
   const columns = [
     {
-      title: 'Date Added (all screens)',
+      title: 'Date Added',
       dataIndex: 'dateAdded',
       key: 'dateAdded',
-      responsive: ['sm'],
+      responsive: ['md'],
     },
     {
-      title: 'Meal (all screens)',
+      title: 'Meal',
       dataIndex: 'mealCount',
       key: 'meal',
-      responsive: ['sm'],
+      responsive: ['md'],
     },
   ];
 
@@ -90,7 +89,7 @@ export const MealByBoarder = () => {
           </Button>
         </Form.Item>
       </Form>
-      {boarderMeal.length > 1 ? (
+      {boarderMeal.length > 0 ? (
       <Table
         dataSource={boarderMeal}
         tableLayout='auto'
@@ -98,7 +97,6 @@ export const MealByBoarder = () => {
         scroll={{ y: 650 }}
         columns={columns}
         // eslint-disable-next-line
-        scroll={{ x: 1300 }}
         bordered={true}
         />) : null}
     </DashboardLayout>

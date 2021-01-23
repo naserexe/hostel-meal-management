@@ -5,7 +5,7 @@ import authReducer from './authReducer'
 
 import setAuthToken from '../../../utils/setAuthToken'
 
-import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, CLEAR_ERRORS } from '../types';
+import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_ERRORS } from '../types';
 
 const AuthState = props => {
   const initialState = {
@@ -80,6 +80,11 @@ const AuthState = props => {
     }
   }
 
+  // log out  test complete
+const logout = () => {
+  dispatch({type: LOGOUT});
+}
+
   return(
     <AuthContext.Provider
     value={{
@@ -90,7 +95,8 @@ const AuthState = props => {
       error: state.error,
       register,
       login,
-      loadUser
+      loadUser,
+      logout,
     }}
     >
       {props.children}

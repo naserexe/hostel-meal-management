@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-
+import moment from 'moment'
 import MealContext from './mealContext';
 import mealReducer from './mealReducer'
 
@@ -83,9 +83,15 @@ const MealState = props => {
   const getSingleBoarderMeal = async(boarderID) => {
     try {
       const res = await axios.get(`/api/meal/boarder/${boarderID}`);
+
+      // Modify response for converting date format
+      const boarderMeal = res.data.data.meal.map(m => {
+        return {dateAdded: moment(m.dateAdded ).format('Do MMMM YYYY, h:mm:ss a'), mealCount: m.mealCount}
+      });
+
       dispatch({
         type: GET_SINGLE_BOARDER_MEAL,
-        payload: res.data.data.meal
+        payload: boarderMeal,
       });
     } catch (err) {
       console.log('Error add');

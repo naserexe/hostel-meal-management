@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
 import {Link} from 'react-router-dom'
 import { Layout, Menu, Button, Row, Col } from 'antd';
 import {
@@ -17,6 +17,9 @@ import {
 
 import './DashboardLayout.css';
 
+import AuthContext from '../../context/auth/authContext';
+
+
 const { Header, Sider, Content, Footer } = Layout;
 const { SubMenu } = Menu;
 
@@ -26,6 +29,14 @@ const Dashboard = (props) => {
 
     const toggle = () => {
         setSidebarToggle(!sidebarToggle)
+    }
+
+    const authContext = useContext(AuthContext);
+
+    const {  logout } = authContext;
+
+    const handleLogOut = () => {
+      logout();
     }
 
     return (
@@ -89,7 +100,7 @@ const Dashboard = (props) => {
               className: 'trigger',
               onClick: toggle,
             })}</Col>
-              <Col flex="0 1 150px"><Button type='default' orientation="right" danger icon={<PoweroffOutlined />}>Logout</Button></Col>
+              <Col flex="0 1 150px"><Button type='default' orientation="right" onClick={handleLogOut} danger icon={<PoweroffOutlined />}>Logout</Button></Col>
             </Row>
             
             

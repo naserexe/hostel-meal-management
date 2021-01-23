@@ -5,12 +5,18 @@ import DepositContext from './depositContext';
 import depositReducer from './depositReducer'
 
 
-import { GET_TOTAL_DEPOSIT_AMOUNT, DEPOSIT_ERROR, ADD_DEPOSIT } from '../types';
+import {
+  GET_TOTAL_DEPOSIT_AMOUNT,
+  DEPOSIT_ERROR,
+  ADD_DEPOSIT, 
+  CLOSE_NOTIFICATION
+} from '../types';
 
 const DepositState = props => {
   const initialState = {
     totalDepositAmount:null,
-    error: null
+    error: null,
+    notification: false,
   }
 
   const [state, dispatch] = useReducer(depositReducer, initialState);
@@ -42,6 +48,9 @@ const DepositState = props => {
       dispatch({
         type: ADD_DEPOSIT
       });
+      setTimeout(() => {
+        dispatch({type: CLOSE_NOTIFICATION})
+      }, 3000)
     } catch (err) {
       console.log('Error add');
       dispatch({type: DEPOSIT_ERROR, payload: err.response.data.error})
@@ -53,6 +62,7 @@ const DepositState = props => {
     value={{
       totalDepositAmount: state.totalDepositAmount,
       error: state.error,
+      notification: state.notification,
       getTotalDepositedAmount,
       addDeposit
 

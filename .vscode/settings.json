@@ -3,7 +3,11 @@
     "antd",
     "linebreak",
     "minlength",
+    "outlined",
+    "poweroff",
+    "poweroff outlined",
     "readonly",
+    "sider",
     "style"
   ]
 }

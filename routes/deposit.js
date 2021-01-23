@@ -5,9 +5,7 @@ const { deposit, getTotalDepositAmount } = require('../controllers/depositContro
 const { protect, authorize } = require('../middleware/auth');
 
 router.route('/')
-    .post(protect, authorize('manager'), deposit)
-    .get(protect, getTotalDepositAmount);
-
-
+  .post(protect, authorize('manager'), deposit)
+  .get(protect, getTotalDepositAmount);
 
 module.exports = router;

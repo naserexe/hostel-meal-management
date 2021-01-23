@@ -5,7 +5,7 @@ import authReducer from './authReducer'
 
 import setAuthToken from '../../../utils/setAuthToken'
 
-import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL } from '../types';
+import { REGISTER_SUCCESS, USER_LOADED, AUTH_ERROR, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_ERRORS } from '../types';
 
 const AuthState = props => {
   const initialState = {
@@ -34,8 +34,10 @@ const AuthState = props => {
       });
       loadUser();
     } catch (err) {
-      console.log(err.response.data);
       dispatch({type: REGISTER_FAIL, payload: err.response.data.error})
+      setTimeout(() => {
+        dispatch({type: CLEAR_ERRORS})
+      }, 3000)
     }
   } 
 
@@ -46,14 +48,16 @@ const AuthState = props => {
           "Content-Type": "application/json"
         }
       };
-  
+
       try {
         const res = await axios.post("/api/auth/login", formData, config);
-  
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
         loadUser();
       } catch (err) {
         dispatch({ type: LOGIN_FAIL, payload: err.response.data.error });
+        setTimeout(() => {
+          dispatch({type: CLEAR_ERRORS})
+        }, 3000)
       }
     };
   
@@ -61,21 +65,25 @@ const AuthState = props => {
   const loadUser = async () => {
     if(localStorage.token){
       setAuthToken(localStorage.token);
-    }
-
-    try {
-      const res = await axios.get('/api/auth/me');
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data
-      })
-    } catch (err) {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: err.response.data.error
-      })
+      try {
+        const res = await axios.get('/api/auth/me');
+        dispatch({
+          type: USER_LOADED,
+          payload: res.data
+        })
+      } catch (err) {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: err.response.data.error
+        })
+      }
     }
   }
+
+  // log out  test complete
+const logout = () => {
+  dispatch({type: LOGOUT});
+}
 
   return(
     <AuthContext.Provider
@@ -87,7 +95,8 @@ const AuthState = props => {
       error: state.error,
       register,
       login,
-      loadUser
+      loadUser,
+      logout,
     }}
     >
       {props.children}

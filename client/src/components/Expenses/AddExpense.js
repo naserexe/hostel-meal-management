@@ -4,17 +4,19 @@ import { withRouter} from 'react-router-dom'
 import { Form, Input, Button, Select } from 'antd';
 import DashboardLayout from '../layout/Dashboard/DashboardLayout'
 
+import Notification from '../Notification/Notification'
+
 import ExpenseContext from '../context/expense/expenseContext'
 import BoarderContext from '../context/boarder/boarderContext'
 
-const { Option } = Select;
 const AddExpense = (props) => {
+  // const [form] = Form.useForm();
 
   const boarderContext = useContext(BoarderContext);
   const { getAllBoarder, boarders } = boarderContext;
 
   const expenseContext = useContext(ExpenseContext);
-  const { addExpense } = expenseContext;
+  const { addExpense, notification } = expenseContext;
 
   useEffect(() => {
     getAllBoarder();
@@ -29,6 +31,7 @@ const AddExpense = (props) => {
 
   const onSubmit = () => {
     addExpense({name, type, cost, marketer})
+
   }
 
   const boarder = boarders.map(boarder => {
@@ -40,6 +43,7 @@ const AddExpense = (props) => {
 
   return (
     <DashboardLayout>
+      <Notification message={notification ? 'Expense added successfully': false} type='success'/>
       <div>
       <Form
         name="normal_login"
@@ -83,9 +87,14 @@ const AddExpense = (props) => {
               required: true,
               message: 'Cost name should be at least 1 Number'
             },
+            {
+              // eslint-disable-next-line
+              pattern: /^(0|[1-9][0-9]*)$/,
+              message: 'Input should be number'
+            },
           ]}
         >
-          <Input onChange={(e) => setCost(e.target.value)} name='name' value={cost}  placeholder="Cost" />
+          <Input onChange={(e) => setCost(e.target.value)} name='cost' value={cost}  placeholder="Cost" />
         </Form.Item>
 
         <Form.Item

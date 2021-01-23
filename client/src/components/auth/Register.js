@@ -5,13 +5,15 @@ import { Form, Input, Button, Select } from 'antd';
 
 import { UserOutlined, MailOutlined, HomeOutlined, LockOutlined } from '@ant-design/icons';
 
+import Notification from '../Notification/Notification'
+
 import AuthContext from '../context/auth/authContext'
 
 const { Option } = Select;
 const Register = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { register, isAuthenticated,loadUser } = authContext;
+  const { register, isAuthenticated,loadUser, error } = authContext;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,10 +24,10 @@ const Register = (props) => {
   useEffect(() => {
     loadUser()
     if(isAuthenticated){
-      props.history.push('/');
+      props.history.push('/dashboard');
     }
+    // eslint-disable-next-line
   },[isAuthenticated])
-
 
   const onSubmit = () => {
     register({name, email, password, hostelName, role});
@@ -33,6 +35,7 @@ const Register = (props) => {
 
   return (
     <div>
+      <Notification error={error} errorType='error'/>
       <Form
         name="normal_login"
         className="login-form"
@@ -47,11 +50,11 @@ const Register = (props) => {
             {
               min:4,
               required: true,
-              message: 'Username should be at least 4 character'
+              message: 'Name should be at least 4 character'
             },
           ]}
         >
-          <Input onChange={(e) => setName(e.target.value)} name='name' value={name} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input onChange={(e) => setName(e.target.value)} name='name' value={name} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Full name" />
         </Form.Item>
 
         <Form.Item
@@ -76,6 +79,7 @@ const Register = (props) => {
           rules={[
             {
               required: true,
+              message: 'Please select your role'
             },
           ]}
         >

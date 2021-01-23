@@ -1,7 +1,25 @@
-import {  ADD_EXPENSE, EXPENSES_ERROR, GET_EXPENSES, GET_TOTAL_EXPENSE_COST } from '../types';
+import {
+  ADD_EXPENSE,
+  EXPENSES_ERROR,
+  GET_EXPENSES,
+  GET_TOTAL_EXPENSE_COST,
+  CLOSE_NOTIFICATION,
+  CLEAR_ERRORS,
+  DELETE_EXPENSE,
+} from '../types';
 
 export default (state, action) => {
   switch(action.type){
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null
+      }
+    case CLOSE_NOTIFICATION:
+      return {
+        ...state,
+        notification: false,
+      }
     case GET_TOTAL_EXPENSE_COST:
       return {
         ...state,
@@ -10,7 +28,13 @@ export default (state, action) => {
     case ADD_EXPENSE:
       return {
         ...state,
-        expenses: action.payload
+        expenses: [action.payload, ...state.expenses],
+        notification: true
+      }
+    case DELETE_EXPENSE:
+      return {
+        ...state,
+        expenses: state.expenses.filter(expense => expense._id !== action.payload._id),
       }
     
       case GET_EXPENSES:

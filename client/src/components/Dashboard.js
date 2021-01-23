@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import DashboardLayout from './layout/Dashboard/DashboardLayout';
 
 import TotalDepositAmount from './Deposit/TotalDepositAmount';
-import TotalExpense from './Expenses/TotalExpense'
-
-
+import TotalExpense from './Expenses/TotalExpense';
+import TotalMeal from './Meal/TotalMeal';
+import MealRate from './Calculation/MealRate';
 
 import { Row, Col } from 'antd';
 
@@ -20,9 +20,19 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <Row>
-      <Col span={4}><TotalExpense/></Col>
-      <Col span={4}><TotalDepositAmount/></Col>
+    <Row>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+      <TotalDepositAmount/>
+      </Col>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+      <TotalExpense/>
+      </Col>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+      <TotalMeal/>
+      </Col>
+      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+      <MealRate/>
+      </Col>
     </Row>
     </DashboardLayout>
   )

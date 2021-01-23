@@ -32,7 +32,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-
 // Grant access for specific roles
 // eslint-disable-next-line
 exports.authorize = (...roles) => {
